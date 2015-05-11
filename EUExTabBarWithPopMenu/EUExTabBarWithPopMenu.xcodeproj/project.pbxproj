@@ -1,0 +1,337 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8457EC601A69552600F7C257 /* EUExTabBarWithPopMenu.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8457EC5F1A69552600F7C257 /* EUExTabBarWithPopMenu.h */; };
+		8457EC621A69552600F7C257 /* EUExTabBarWithPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC611A69552600F7C257 /* EUExTabBarWithPopMenu.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8457EC8F1A69565200F7C257 /* LDCustomCenterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC821A69565200F7C257 /* LDCustomCenterItem.m */; };
+		8457EC901A69565200F7C257 /* LDCustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC841A69565200F7C257 /* LDCustomTabBar.m */; };
+		8457EC911A69565200F7C257 /* LDCustomTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC861A69565200F7C257 /* LDCustomTabBarItem.m */; };
+		8457EC921A69565200F7C257 /* LDGridTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC881A69565200F7C257 /* LDGridTableViewCell.m */; };
+		8457EC941A69565200F7C257 /* LDPopMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC8C1A69565200F7C257 /* LDPopMenuItem.m */; };
+		8457EC951A69565200F7C257 /* LDPopMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC8E1A69565200F7C257 /* LDPopMenuView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8457EC5A1A69552600F7C257 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				8457EC601A69552600F7C257 /* EUExTabBarWithPopMenu.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8457EC5C1A69552600F7C257 /* libuexTabBarWithPopMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuexTabBarWithPopMenu.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8457EC5F1A69552600F7C257 /* EUExTabBarWithPopMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EUExTabBarWithPopMenu.h; sourceTree = "<group>"; };
+		8457EC611A69552600F7C257 /* EUExTabBarWithPopMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EUExTabBarWithPopMenu.m; sourceTree = "<group>"; };
+		8457EC781A69565200F7C257 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		8457EC791A69565200F7C257 /* JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
+		8457EC7A1A69565200F7C257 /* MD5Digest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5Digest.h; sourceTree = "<group>"; };
+		8457EC7B1A69565200F7C257 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		8457EC7C1A69565200F7C257 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		8457EC7D1A69565200F7C257 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		8457EC7E1A69565200F7C257 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		8457EC7F1A69565200F7C257 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		8457EC801A69565200F7C257 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		8457EC811A69565200F7C257 /* LDCustomCenterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDCustomCenterItem.h; sourceTree = "<group>"; };
+		8457EC821A69565200F7C257 /* LDCustomCenterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDCustomCenterItem.m; sourceTree = "<group>"; };
+		8457EC831A69565200F7C257 /* LDCustomTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDCustomTabBar.h; sourceTree = "<group>"; };
+		8457EC841A69565200F7C257 /* LDCustomTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDCustomTabBar.m; sourceTree = "<group>"; };
+		8457EC851A69565200F7C257 /* LDCustomTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDCustomTabBarItem.h; sourceTree = "<group>"; };
+		8457EC861A69565200F7C257 /* LDCustomTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDCustomTabBarItem.m; sourceTree = "<group>"; };
+		8457EC871A69565200F7C257 /* LDGridTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGridTableViewCell.h; sourceTree = "<group>"; };
+		8457EC881A69565200F7C257 /* LDGridTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGridTableViewCell.m; sourceTree = "<group>"; };
+		8457EC8B1A69565200F7C257 /* LDPopMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDPopMenuItem.h; sourceTree = "<group>"; };
+		8457EC8C1A69565200F7C257 /* LDPopMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDPopMenuItem.m; sourceTree = "<group>"; };
+		8457EC8D1A69565200F7C257 /* LDPopMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDPopMenuView.h; sourceTree = "<group>"; };
+		8457EC8E1A69565200F7C257 /* LDPopMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDPopMenuView.m; sourceTree = "<group>"; };
+		8457EC9B1A6956EF00F7C257 /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBase.h; sourceTree = "<group>"; };
+		8457EC9C1A6956EF00F7C257 /* EUExBaseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBaseDefine.h; sourceTree = "<group>"; };
+		8457EC9D1A6956EF00F7C257 /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8457EC591A69552600F7C257 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8457EC531A69552600F7C257 = {
+			isa = PBXGroup;
+			children = (
+				8457EC5E1A69552600F7C257 /* EUExTabBarWithPopMenu */,
+				8457EC5D1A69552600F7C257 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8457EC5D1A69552600F7C257 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8457EC5C1A69552600F7C257 /* libuexTabBarWithPopMenu.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8457EC5E1A69552600F7C257 /* EUExTabBarWithPopMenu */ = {
+			isa = PBXGroup;
+			children = (
+				8457EC9A1A6956EF00F7C257 /* engineHeader */,
+				8457EC761A69565200F7C257 /* sourceCode */,
+				8457EC5F1A69552600F7C257 /* EUExTabBarWithPopMenu.h */,
+				8457EC611A69552600F7C257 /* EUExTabBarWithPopMenu.m */,
+			);
+			path = EUExTabBarWithPopMenu;
+			sourceTree = "<group>";
+		};
+		8457EC761A69565200F7C257 /* sourceCode */ = {
+			isa = PBXGroup;
+			children = (
+				8457EC771A69565200F7C257 /* JSON */,
+				8457EC811A69565200F7C257 /* LDCustomCenterItem.h */,
+				8457EC821A69565200F7C257 /* LDCustomCenterItem.m */,
+				8457EC831A69565200F7C257 /* LDCustomTabBar.h */,
+				8457EC841A69565200F7C257 /* LDCustomTabBar.m */,
+				8457EC851A69565200F7C257 /* LDCustomTabBarItem.h */,
+				8457EC861A69565200F7C257 /* LDCustomTabBarItem.m */,
+				8457EC871A69565200F7C257 /* LDGridTableViewCell.h */,
+				8457EC881A69565200F7C257 /* LDGridTableViewCell.m */,
+				8457EC8B1A69565200F7C257 /* LDPopMenuItem.h */,
+				8457EC8C1A69565200F7C257 /* LDPopMenuItem.m */,
+				8457EC8D1A69565200F7C257 /* LDPopMenuView.h */,
+				8457EC8E1A69565200F7C257 /* LDPopMenuView.m */,
+			);
+			path = sourceCode;
+			sourceTree = "<group>";
+		};
+		8457EC771A69565200F7C257 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				8457EC781A69565200F7C257 /* JSON.h */,
+				8457EC791A69565200F7C257 /* JSONParser.h */,
+				8457EC7A1A69565200F7C257 /* MD5Digest.h */,
+				8457EC7B1A69565200F7C257 /* NSObject+SBJSON.h */,
+				8457EC7C1A69565200F7C257 /* NSString+SBJSON.h */,
+				8457EC7D1A69565200F7C257 /* SBJSON.h */,
+				8457EC7E1A69565200F7C257 /* SBJsonBase.h */,
+				8457EC7F1A69565200F7C257 /* SBJsonParser.h */,
+				8457EC801A69565200F7C257 /* SBJsonWriter.h */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		8457EC9A1A6956EF00F7C257 /* engineHeader */ = {
+			isa = PBXGroup;
+			children = (
+				8457EC9B1A6956EF00F7C257 /* EUExBase.h */,
+				8457EC9C1A6956EF00F7C257 /* EUExBaseDefine.h */,
+				8457EC9D1A6956EF00F7C257 /* EUtility.h */,
+			);
+			path = engineHeader;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8457EC5B1A69552600F7C257 /* EUExTabBarWithPopMenu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8457EC701A69552600F7C257 /* Build configuration list for PBXNativeTarget "EUExTabBarWithPopMenu" */;
+			buildPhases = (
+				8457EC581A69552600F7C257 /* Sources */,
+				8457EC591A69552600F7C257 /* Frameworks */,
+				8457EC5A1A69552600F7C257 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EUExTabBarWithPopMenu;
+			productName = EUExTabBarWithPopMenu;
+			productReference = 8457EC5C1A69552600F7C257 /* libuexTabBarWithPopMenu.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8457EC541A69552600F7C257 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = LinDong;
+				TargetAttributes = {
+					8457EC5B1A69552600F7C257 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 8457EC571A69552600F7C257 /* Build configuration list for PBXProject "EUExTabBarWithPopMenu" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8457EC531A69552600F7C257;
+			productRefGroup = 8457EC5D1A69552600F7C257 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8457EC5B1A69552600F7C257 /* EUExTabBarWithPopMenu */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8457EC581A69552600F7C257 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8457EC8F1A69565200F7C257 /* LDCustomCenterItem.m in Sources */,
+				8457EC951A69565200F7C257 /* LDPopMenuView.m in Sources */,
+				8457EC911A69565200F7C257 /* LDCustomTabBarItem.m in Sources */,
+				8457EC621A69552600F7C257 /* EUExTabBarWithPopMenu.m in Sources */,
+				8457EC901A69565200F7C257 /* LDCustomTabBar.m in Sources */,
+				8457EC941A69565200F7C257 /* LDPopMenuItem.m in Sources */,
+				8457EC921A69565200F7C257 /* LDGridTableViewCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8457EC6E1A69552600F7C257 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/uexTabBarWithPopMenu";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8457EC6F1A69552600F7C257 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/uexTabBarWithPopMenu";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8457EC711A69552600F7C257 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = uexTabBarWithPopMenu;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8457EC721A69552600F7C257 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = uexTabBarWithPopMenu;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8457EC571A69552600F7C257 /* Build configuration list for PBXProject "EUExTabBarWithPopMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8457EC6E1A69552600F7C257 /* Debug */,
+				8457EC6F1A69552600F7C257 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8457EC701A69552600F7C257 /* Build configuration list for PBXNativeTarget "EUExTabBarWithPopMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8457EC711A69552600F7C257 /* Debug */,
+				8457EC721A69552600F7C257 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8457EC541A69552600F7C257 /* Project object */;
+}
