@@ -15,7 +15,6 @@
 #define kDefaultItemSpace 20
 @interface LDPopMenuView() <UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NSArray *datas;
-@property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,assign)int rowCount;
 @property(nonatomic,assign)CGFloat itemWidth;
 @end

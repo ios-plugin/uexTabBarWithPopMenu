@@ -7,9 +7,9 @@
 //
 
 #import "LDCustomCenterItem.h"
-//#import "UIView+Helpers.h"
+
 @interface LDCustomCenterItem()
-@property(nonatomic,strong)UIImageView *contentImgView;
+
 @end
 @implementation LDCustomCenterItem
 -(id)initWithFrame:(CGRect)frame contentImg:(UIImage *)contentImg{
@@ -39,8 +39,10 @@
     [UIView animateWithDuration:0.25 animations:^{
         _contentImgView.transform = CGAffineTransformMakeRotation(angle);
         
+        
     } completion:^(BOOL finished) {
         self.popMenuIsExpanding = !self.popMenuIsExpanding;
     }];
+    
 }
 @end

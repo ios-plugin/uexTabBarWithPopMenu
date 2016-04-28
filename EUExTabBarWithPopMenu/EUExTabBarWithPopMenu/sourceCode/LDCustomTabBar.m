@@ -33,27 +33,27 @@ static CGFloat const kDefaultCenterHeight = 59;
 @property(nonatomic,strong)LDPopMenuView *popContainerView;
 @end
 @implementation LDCustomTabBar
--(id)initWithFrame:(CGRect)frame delegate:(id)delegate{
+-(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate{
     if (self = [super initWithFrame:frame]) {
-        [self setBackgroundColor:kDefaultBackgroundColor];
+        [self setBackgroundColor:backgroundColor];
         self.delegate = delegate;
-        [self drawCenterItem];
-        [self drawStatusView];
+        [self drawCenterItemWithCenterImage:centerImage];
+        [self drawStatusViewWithStatusColor:statusColor];
     }
     return self;
 }
--(void)drawCenterItem{
-    LDCustomCenterItem *centerItem = [[LDCustomCenterItem alloc] initWithFrame:CGRectMake((self.frame.size.width - kDefaultCenterWidth)*0.5, self.frame.size.height - kDefaultCenterHeight, kDefaultCenterWidth, kDefaultCenterHeight) contentImg:[[self class] loadLocalImgWithPluginName:@"uexTabBarWithPopMenu" fileName:@"plugin_tabbar_center_plus@2x"]];
+-(void)drawCenterItemWithCenterImage:(UIImage*)centerImage{
+    LDCustomCenterItem *centerItem = [[LDCustomCenterItem alloc] initWithFrame:CGRectMake((self.frame.size.width - kDefaultCenterWidth)*0.5, self.frame.size.height - kDefaultCenterHeight, kDefaultCenterWidth, kDefaultCenterHeight) contentImg:centerImage];
     centerItem.delegate = self;
-    [centerItem setImage:[[self class] loadLocalImgWithPluginName:@"uexTabBarWithPopMenu" fileName:@"plugin_tabbar_center_item@2x"]];
+//    [centerItem setImage:[[self class] loadLocalImgWithPluginName:@"uexTabBarWithPopMenu" fileName:@"plugin_tabbar_center_item@2x"]];
     [self addSubview:centerItem];
     self.centerView = centerItem;
     
     
 }
--(void)drawStatusView{
+-(void)drawStatusViewWithStatusColor:(UIColor*)statusColor{
     UIView *statusView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - kDefaultStatusViewHeight,self.frame.size.width, kDefaultStatusViewHeight)];
-    [statusView setBackgroundColor:kDefaultStatusViewColor];
+    [statusView setBackgroundColor:statusColor];
     [self addSubview:statusView];
     statusView.hidden = YES;
     self.statusView = statusView;
@@ -81,23 +81,24 @@ static CGFloat const kDefaultCenterHeight = 59;
     }
 
 }
--(void)setPopMenuItems:(NSArray *)items{
+-(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance {
     self.popItems = items;
-    [self addPopItems];
+    [self addPopItemsWithBackgroundColor:bgColor popMenuColor:popMenuColor bottomDistance:bottomDistance];
 }
--(void)drawBackgroundView{
+-(void)drawBackgroundView:(UIColor *)bgColor{
     UIView *mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [EUtility screenWidth], [EUtility screenHeight])];
-    [mainView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.8]];
+    [mainView setBackgroundColor:bgColor];//[UIColor colorWithWhite:0 alpha:0.5]];
     [mainView setHidden:YES];
     UITapGestureRecognizer *mainBackTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popMainBackTap:)];
     [mainView addGestureRecognizer:mainBackTap];
     [[UIApplication sharedApplication].keyWindow addSubview:mainView];
     self.popMainBackView = mainView;
 }
--(void)drawPopContainerView{
-    LDPopMenuView *containerView = [[LDPopMenuView alloc] initWithFrame:CGRectMake(0, 200,self.popMainBackView.frame.size.width , self.popMainBackView.frame.size.height - 200 ) items:self.popItems];
+-(void)drawPopContainerVieWWithBottomDistance:(CGFloat)bottomDistance popMenuColor:(UIColor*)popMenuColor{
+
+    LDPopMenuView *containerView = [[LDPopMenuView alloc] initWithFrame:CGRectMake(0,[EUtility screenHeight] - bottomDistance,self.popMainBackView.frame.size.width , self.popMainBackView.frame.size.height - 200 ) items:self.popItems];
     [containerView setOpaque:YES];
-    [containerView setBackgroundColor:[UIColor clearColor]];
+    [containerView setBackgroundColor:popMenuColor];
     [self.popMainBackView addSubview:containerView];
     self.popContainerView = containerView;
 }
@@ -106,9 +107,9 @@ static CGFloat const kDefaultCenterHeight = 59;
     [gView setHidden:YES];
     [self.centerView resetAnimations];
 }
--(void)addPopItems{
-    [self drawBackgroundView];
-    [self drawPopContainerView];
+-(void)addPopItemsWithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor bottomDistance:(CGFloat)bottomDistance{
+    [self drawBackgroundView:bgColor];
+    [self drawPopContainerVieWWithBottomDistance:bottomDistance popMenuColor:popMenuColor];
 
 }
 -(void)selectTabItemWithIndex:(int)index{
@@ -117,13 +118,14 @@ static CGFloat const kDefaultCenterHeight = 59;
     }
     self.currentIndex = index;
     [self changeCurrentStatusView];
+    
 }
 -(void)centerItemClickWithStatus:(BOOL)isExpanding{
     if (!self.popItems) {
         return;
     }
     self.popMainBackView.hidden = NO;
-    
+  
 }
 -(void)changeCurrentStatusView{
     if (self.statusView.hidden) {
@@ -151,10 +153,10 @@ static CGFloat const kDefaultCenterHeight = 59;
         
     }];
 }
-+(UIImage *)loadLocalImgWithPluginName:(NSString *)plgName fileName:(NSString *)fName{
-    NSString *bPath = [plgName stringByAppendingPathComponent:fName];
-    NSString *path = [[NSBundle mainBundle] pathForResource:bPath ofType:@"png"];
-    UIImage *image = [UIImage imageWithContentsOfFile:path];
-    return image;
-}
+//+(UIImage *)loadLocalImgWithPluginName:(NSString *)plgName fileName:(NSString *)fName{
+//    NSString *bPath = [plgName stringByAppendingPathComponent:fName];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:bPath ofType:@"png"];
+//    UIImage *image = [UIImage imageWithContentsOfFile:path];
+//    return image;
+//}
 @end

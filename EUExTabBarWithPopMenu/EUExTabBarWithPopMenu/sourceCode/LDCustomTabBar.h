@@ -13,10 +13,10 @@
 @property(nonatomic,weak)id <LDCustomTabBarDelegate> delegate;
 
 
--(id)initWithFrame:(CGRect)frame delegate:(id)delegate;
+-(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate;
 
 -(void)setTabBarItems:(NSArray *)items;
--(void)setPopMenuItems:(NSArray *)items;
+-(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance;
 -(void)selectTabItemWithIndex:(int)index;
 
 @end

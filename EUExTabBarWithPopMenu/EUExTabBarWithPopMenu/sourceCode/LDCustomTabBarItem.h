@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface LDCustomTabBarItem : UIView
--(id)initWithTitle:(NSString *)title contentImage:(UIImage *)contentImg contentHighlightImage:(UIImage *)contentHImage;
+-(id)initWithTitle:(NSString *)title textSize:(CGFloat)textSize textColor:(UIColor*)textColor highlightedTextColor:(UIColor*)highlightedTextColor  contentImage:(UIImage *)contentImg contentHighlightImage:(UIImage *)contentHImage;
 
 @end

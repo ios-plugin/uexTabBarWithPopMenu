@@ -11,6 +11,7 @@
 
 @interface LDCustomCenterItem : UIImageView
 @property(nonatomic,assign)BOOL popMenuIsExpanding;
+@property(nonatomic,strong)UIImageView *contentImgView;
 @property(nonatomic,weak)id <LDCustomCenterItemDelegate>delegate;
 -(id)initWithFrame:(CGRect)frame contentImg:(UIImage *)contentImg;
 -(void)resetAnimations;

@@ -3,9 +3,8 @@
     <plugin name="uexTabBarWithPopMenu">
         <method name="open"></method>
         <method name="close"></method>
-        <method name="setTabItems"></method>
-        <method name="setPopMenuItems"></method>
-        <method name="onTabItemClick"></method>
-        <method name="onPopMenuItemClick"></method>
+        <method name="setItemChecked"></method>
+       
+       
     </plugin>
 </uexplugins>

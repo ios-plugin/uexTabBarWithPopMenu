@@ -14,7 +14,7 @@
 @property(nonatomic,strong)UILabel *titleLabel;
 @end
 @implementation LDCustomTabBarItem
--(id)initWithTitle:(NSString *)title contentImage:(UIImage *)contentImg contentHighlightImage:(UIImage *)contentHImage{
+-(id)initWithTitle:(NSString *)title textSize:(CGFloat)textSize textColor:(UIColor*)textColor highlightedTextColor:(UIColor*)highlightedTextColor  contentImage:(UIImage *)contentImg contentHighlightImage:(UIImage *)contentHImage{
     if (self = [super initWithFrame:CGRectZero]) {
         UIImageView *contentImgView = [[UIImageView alloc] initWithImage:contentImg highlightedImage:contentHImage];
         [contentImgView setUserInteractionEnabled:YES];
@@ -24,8 +24,9 @@
         [tLabel setBackgroundColor:[UIColor clearColor]];
         [tLabel setText:title];
         [tLabel setTextAlignment:NSTextAlignmentCenter];
-        [tLabel setTextColor:kDefaultTitleLabelTextColor];        
-        [tLabel setFont:[UIFont boldSystemFontOfSize:10.0]];
+        [tLabel setTextColor:textColor];
+        [tLabel setHighlightedTextColor:highlightedTextColor];
+        [tLabel setFont:[UIFont boldSystemFontOfSize:textSize]];
         [self addSubview:tLabel];
         self.titleLabel = tLabel;
     }

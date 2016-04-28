@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @interface LDPopMenuItem : UIView
--(id)initWithTitle:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage textColor:(UIColor *)textColor;
+-(id)initWithTitle:(NSString *)title textSize:(CGFloat)textSize textColor:(UIColor*)textColor highlightedTextColor:(UIColor*)highlightedTextColor image:(UIImage *)image selectedImage:(UIImage *)selectedImage;
 @property(nonatomic,assign)int row;
 @property(nonatomic,assign)int column;
 @end

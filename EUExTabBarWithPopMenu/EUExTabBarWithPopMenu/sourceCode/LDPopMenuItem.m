@@ -16,7 +16,7 @@
 @end
 @implementation LDPopMenuItem
 
--(id)initWithTitle:(NSString *)title image:(UIImage *)image selectedImage:(UIImage *)selectedImage textColor:(UIColor *)textColor{
+-(id)initWithTitle:(NSString *)title textSize:(CGFloat)textSize textColor:(UIColor*)textColor highlightedTextColor:(UIColor*)highlightedTextColor image:(UIImage *)image selectedImage:(UIImage *)selectedImage {
     if (self = [super initWithFrame:CGRectZero]) {
         UIImageView *contentImgView = [[UIImageView alloc] initWithImage:image highlightedImage:selectedImage];
         [contentImgView setUserInteractionEnabled:YES];
@@ -25,9 +25,11 @@
         UILabel *tLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [tLabel setBackgroundColor:[UIColor clearColor]];
         [tLabel setText:title];
+        [tLabel setTextColor:textColor];
+        [tLabel setHighlightedTextColor:highlightedTextColor];
         [tLabel setTextAlignment:NSTextAlignmentCenter];
-        [tLabel setTextColor:textColor?textColor:kDefaultTitleLabelTextColor];
-        [tLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+        //[tLabel setTextColor:textColor?textColor:kDefaultTitleLabelTextColor];
+        [tLabel setFont:[UIFont boldSystemFontOfSize:textSize]];
         [self addSubview:tLabel];
         self.titleLab = tLabel;
     }
