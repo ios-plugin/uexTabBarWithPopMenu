@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8457EC601A69552600F7C257 /* EUExTabBarWithPopMenu.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8457EC5F1A69552600F7C257 /* EUExTabBarWithPopMenu.h */; };
 		8457EC621A69552600F7C257 /* EUExTabBarWithPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC611A69552600F7C257 /* EUExTabBarWithPopMenu.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8457EC8F1A69565200F7C257 /* LDCustomCenterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC821A69565200F7C257 /* LDCustomCenterItem.m */; };
 		8457EC901A69565200F7C257 /* LDCustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC841A69565200F7C257 /* LDCustomTabBar.m */; };
@@ -21,10 +20,9 @@
 		8457EC5A1A69552600F7C257 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
+			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				8457EC601A69552600F7C257 /* EUExTabBarWithPopMenu.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
