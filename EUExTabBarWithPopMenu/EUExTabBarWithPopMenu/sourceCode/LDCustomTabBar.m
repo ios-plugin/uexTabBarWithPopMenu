@@ -45,7 +45,6 @@ static CGFloat const kDefaultCenterHeight = 59;
 -(void)drawCenterItemWithCenterImage:(UIImage*)centerImage{
     LDCustomCenterItem *centerItem = [[LDCustomCenterItem alloc] initWithFrame:CGRectMake((self.frame.size.width - kDefaultCenterWidth)*0.5, self.frame.size.height - kDefaultCenterHeight, kDefaultCenterWidth, kDefaultCenterHeight) contentImg:centerImage];
     centerItem.delegate = self;
-//    [centerItem setImage:[[self class] loadLocalImgWithPluginName:@"uexTabBarWithPopMenu" fileName:@"plugin_tabbar_center_item@2x"]];
     [self addSubview:centerItem];
     self.centerView = centerItem;
     
@@ -125,6 +124,11 @@ static CGFloat const kDefaultCenterHeight = 59;
         return;
     }
     self.popMainBackView.hidden = NO;
+    //CGRect frame = self.centerView.frame;
+    //[self.popContainerView addSubview:self.centerView.contentImgView];
+    //[self.centerView.contentImgView setFrame:CGRectMake(5, 5, frame.size.width - 10, frame.size.width - 10)];
+    //[self insertSubview:self.centerView.contentImgView  aboveSubview:self.popContainerView];
+    //[self bringSubviewToFront:self.centerView];
   
 }
 -(void)changeCurrentStatusView{
@@ -153,10 +157,5 @@ static CGFloat const kDefaultCenterHeight = 59;
         
     }];
 }
-//+(UIImage *)loadLocalImgWithPluginName:(NSString *)plgName fileName:(NSString *)fName{
-//    NSString *bPath = [plgName stringByAppendingPathComponent:fName];
-//    NSString *path = [[NSBundle mainBundle] pathForResource:bPath ofType:@"png"];
-//    UIImage *image = [UIImage imageWithContentsOfFile:path];
-//    return image;
-//}
+
 @end

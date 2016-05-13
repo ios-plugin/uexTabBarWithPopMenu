@@ -7,7 +7,7 @@
 //
 
 #import "LDCustomCenterItem.h"
-
+#import "EUtility.h"
 @interface LDCustomCenterItem()
 
 @end
@@ -29,6 +29,7 @@
 -(void)centerItemTap:(UITapGestureRecognizer *)tapG{
     if (self.delegate&&[self.delegate respondsToSelector:@selector(centerItemClickWithStatus:)]) {
         [_delegate centerItemClickWithStatus:self.popMenuIsExpanding];
+        
     }
     
     [self resetAnimations];
@@ -38,8 +39,7 @@
     float angle = !self.popMenuIsExpanding ? M_PI_4*3 : 0.0f;
     [UIView animateWithDuration:0.25 animations:^{
         _contentImgView.transform = CGAffineTransformMakeRotation(angle);
-        
-        
+                
     } completion:^(BOOL finished) {
         self.popMenuIsExpanding = !self.popMenuIsExpanding;
     }];

@@ -34,9 +34,9 @@
     id info=[inArguments[0] JSONValue];
     float x = [[info objectForKey:@"left"] floatValue]?:0;
     float hei = 50;//0.068*[EUtility screenHeight];
-    float y = [[info objectForKey:@"top"] floatValue]?:[EUtility screenHeight] -hei ;
     float width = [[info objectForKey:@"width"] floatValue]?:[EUtility screenWidth];
     float height = [[info objectForKey:@"height"] floatValue]?:hei;
+    float y = [[info objectForKey:@"top"] floatValue]?:[EUtility screenHeight] -height ;
     NSString *statusColor = [info objectForKey:@"statusColor"]?:@"#EA7C24";
     NSDictionary *tabDic = [info objectForKey:@"tab"];
     float tabTextSize = [[tabDic objectForKey:@"textSize"] floatValue]?:10;
