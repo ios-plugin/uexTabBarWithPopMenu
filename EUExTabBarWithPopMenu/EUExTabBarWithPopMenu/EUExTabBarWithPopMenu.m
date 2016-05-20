@@ -36,7 +36,7 @@
     float hei = 50;//0.068*[EUtility screenHeight];
     float width = [[info objectForKey:@"width"] floatValue]?:[EUtility screenWidth];
     float height = [[info objectForKey:@"height"] floatValue]?:hei;
-    float y = [[info objectForKey:@"top"] floatValue]?:[EUtility screenHeight] -height ;
+     float y = [[info objectForKey:@"top"] floatValue]?:[EUtility screenHeight] -height ;
     NSString *statusColor = [info objectForKey:@"statusColor"]?:@"#EA7C24";
     NSDictionary *tabDic = [info objectForKey:@"tab"];
     float tabTextSize = [[tabDic objectForKey:@"textSize"] floatValue]?:10;
@@ -142,12 +142,16 @@
     UIView *v = gesture.view;
     int idx = (int)v.tag - kBaseTag;
     [self.tabBar selectTabItemWithIndex:idx];
-    [self.meBrwView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"uexTabBarWithPopMenu.onTabItemClick(%d);",idx]];
+    NSDictionary *dic = @{@"index":@(idx)};
+    [self callBackJsonWithFunction:@"onTabItemClick" parameter:dic];
+//    [self.meBrwView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"uexTabBarWithPopMenu.onTabItemClick(%@);",dic]];
 }
 -(void)popItemClick:(UITapGestureRecognizer *)gesture{
     UIView *v = gesture.view;
     int idx = (int)v.tag - kBaseTag;
-    [self.meBrwView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"uexTabBarWithPopMenu.onPopMenuItemClick(%d);",idx]];
+     NSDictionary *dic = @{@"index":@(idx)};
+    [self callBackJsonWithFunction:@"onPopMenuItemClick" parameter:dic];
+    //[self.meBrwView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"uexTabBarWithPopMenu.onPopMenuItemClick(%@);",dic]];
 
 }
 -(void)close:(NSMutableArray *)array{
@@ -156,5 +160,12 @@
         [_tabBar removeFromSuperview];
         self.tabBar = nil;
     }
+}
+#pragma mark - CallBack Method
+const static NSString *kPluginName=@"uexTabBarWithPopMenu";
+-(void)callBackJsonWithFunction:(NSString *)functionName parameter:(id)obj{
+    NSString *jsonStr = [NSString stringWithFormat:@"if(%@.%@ != null){%@.%@('%@');}",kPluginName,functionName,kPluginName,functionName,[obj JSONFragment]];
+    [EUtility brwView:self.meBrwView evaluateScript:jsonStr];
+    
 }
 @end
