@@ -12,7 +12,7 @@
 
 @end
 @implementation LDCustomCenterItem
--(id)initWithFrame:(CGRect)frame contentImg:(UIImage *)contentImg{
+-(LDCustomCenterItem*)initWithFrame:(CGRect)frame contentImg:(UIImage *)contentImg{
     if (self = [super initWithFrame:frame]) {
         self.popMenuIsExpanding = NO;
         [self setUserInteractionEnabled:YES];

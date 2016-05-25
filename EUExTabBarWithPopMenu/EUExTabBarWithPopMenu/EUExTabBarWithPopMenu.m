@@ -97,12 +97,13 @@
     }
 
     /*-----------------------*/
-    self.tabBar = [[LDCustomTabBar alloc] initWithFrame:CGRectMake(x,y ,width, height) centerImage:[self readImageFromPath:centerImgSrc] backgroundColor:[EUtility ColorFromString:bgColor] statusColor:[EUtility ColorFromString:statusColor] delegate:self];
+    self.tabBar = [[LDCustomTabBar alloc] initWithFrame:CGRectMake(x,y ,width, height) centerImage:[self readImageFromPath:centerImgSrc] backgroundColor:[EUtility ColorFromString:bgColor] statusColor:[EUtility ColorFromString:statusColor] delegate:self count:tabDataArr.count];
     [EUtility brwView:self.meBrwView addSubview:self.tabBar];
     /*----------- set tab data------------*/
     NSMutableArray *itemButtons = [NSMutableArray arrayWithCapacity:tabDataArr.count];
     for (int i = 0; i < tabDataArr.count; i++) {
-        LDCustomTabBarItem *item = [[LDCustomTabBarItem alloc] initWithTitle:titleArr[i] textSize:tabTextSize textColor:[EUtility ColorFromString:tabTextNColor] highlightedTextColor:[EUtility ColorFromString:tabTextHColor]  contentImage:imageNArr[i] contentHighlightImage:imageHArr[i]];
+       LDCustomTabBarItem *item = [[LDCustomTabBarItem alloc] initWithTitle:titleArr[i] textSize:tabTextSize textColor:[EUtility ColorFromString:tabTextNColor] highlightedTextColor:[EUtility ColorFromString:tabTextHColor]  contentImage:imageNArr[i] contentHighlightImage:imageHArr[i]];
+        
         item.tag = kBaseTag+i;
         UITapGestureRecognizer *tabTapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tabBarItemClick:)];
         [item addGestureRecognizer:tabTapG];
@@ -144,14 +145,14 @@
     [self.tabBar selectTabItemWithIndex:idx];
     NSDictionary *dic = @{@"index":@(idx)};
     [self callBackJsonWithFunction:@"onTabItemClick" parameter:dic];
-//    [self.meBrwView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"uexTabBarWithPopMenu.onTabItemClick(%@);",dic]];
 }
 -(void)popItemClick:(UITapGestureRecognizer *)gesture{
     UIView *v = gesture.view;
     int idx = (int)v.tag - kBaseTag;
      NSDictionary *dic = @{@"index":@(idx)};
+    self.tabBar.popMainBackView.hidden = YES;
+    [self.tabBar.centerView resetAnimations];
     [self callBackJsonWithFunction:@"onPopMenuItemClick" parameter:dic];
-    //[self.meBrwView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"uexTabBarWithPopMenu.onPopMenuItemClick(%@);",dic]];
 
 }
 -(void)close:(NSMutableArray *)array{

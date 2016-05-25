@@ -7,7 +7,7 @@
 //
 
 #import "LDCustomTabBar.h"
-#import "LDCustomCenterItem.h"
+
 //#import "UIView+Helpers.h"
 //#import "LDPluginUtil.h"
 #import "LDCustomTabBarItem.h"
@@ -27,16 +27,25 @@ static CGFloat const kDefaultCenterHeight = 59;
 @property(nonatomic,strong)NSArray *tabItems;
 @property(nonatomic,strong)NSArray *popItems;
 @property(nonatomic,strong)UIView *statusView;
-@property(nonatomic,strong)LDCustomCenterItem *centerView;
+
 @property(nonatomic,assign)NSInteger currentIndex;
-@property(nonatomic,strong)UIView *popMainBackView;
+@property(nonatomic,strong)UIColor *statusColor;
 @property(nonatomic,strong)LDPopMenuView *popContainerView;
+@property(nonatomic,strong)NSMutableArray *selectArr;
+@property(nonatomic,assign)NSInteger count;
 @end
 @implementation LDCustomTabBar
--(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate{
+-(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate count:(NSInteger)count{
     if (self = [super initWithFrame:frame]) {
         [self setBackgroundColor:backgroundColor];
         self.delegate = delegate;
+        self.statusColor = statusColor;
+        self.count = count;
+        self.selectArr = [NSMutableArray array];
+        for (int i = 0; i < count; i++) {
+            [self.selectArr addObject:@(i)];
+        }
+        
         [self drawCenterItemWithCenterImage:centerImage];
         [self drawStatusViewWithStatusColor:statusColor];
     }
@@ -116,7 +125,7 @@ static CGFloat const kDefaultCenterHeight = 59;
         return;
     }
     self.currentIndex = index;
-    [self changeCurrentStatusView];
+    [self changeCurrentStatusViewWithIndex:index];
     
 }
 -(void)centerItemClickWithStatus:(BOOL)isExpanding{
@@ -131,7 +140,8 @@ static CGFloat const kDefaultCenterHeight = 59;
     //[self bringSubviewToFront:self.centerView];
   
 }
--(void)changeCurrentStatusView{
+-(void)changeCurrentStatusViewWithIndex:(int)index{
+    
     if (self.statusView.hidden) {
         assert(self.tabItems.count!=0);
         self.statusView.hidden = NO;
@@ -140,6 +150,22 @@ static CGFloat const kDefaultCenterHeight = 59;
         rect.size.width = w;
         self.statusView.frame = rect;
     }
+    
+    
+    for (NSNumber*num  in self.selectArr) {
+        if (index == [num intValue]) {
+            [self setIndex:@(index)];
+        }else{
+            for (int i = 0; i < self.selectArr.count; i++) {
+                if (i != index) {
+                    [self cancelIndex:self.selectArr[i]];
+                }
+                
+            }
+            
+        }
+    }
+
     [UIView animateWithDuration:0.25 animations:^{
         if (self.currentIndex < (self.tabItems.count/2)) {
             float x = _statusView.frame.size.width*self.currentIndex;
@@ -151,11 +177,28 @@ static CGFloat const kDefaultCenterHeight = 59;
             CGRect rect = self.statusView.frame;
             rect.origin.x = x;
             self.statusView.frame = rect;
-            
-        }
+                    }
     } completion:^(BOOL finished) {
         
+
     }];
 }
+-(void)setIndex:(NSNumber*)x{
+    int index = [x intValue];
+    LDCustomTabBarItem *itemView = self.tabItems[index];
+    itemView.contentImgView.image = itemView.contentHImage;
+    itemView.titleLabel.textColor = self.statusColor;
+    }
+    
+ -(void)cancelIndex:(NSNumber*)x{
+     int index = [x intValue];
+     LDCustomTabBarItem *itemView = self.tabItems[index];
+     itemView.contentImgView.image = itemView.contentImg;
+     [itemView.titleLabel setTextColor:itemView.textColor];
+     [itemView.titleLabel setHighlightedTextColor:itemView.highlightedTextColor];
+ }
+    
+
+    
 
 @end

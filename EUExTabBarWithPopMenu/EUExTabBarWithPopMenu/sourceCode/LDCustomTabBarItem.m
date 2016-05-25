@@ -10,13 +10,16 @@
 //#import "UIView+Helpers.h"
 #define kDefaultTitleLabelTextColor [UIColor whiteColor]
 @interface LDCustomTabBarItem()
-@property(nonatomic,strong)UIImageView *contentImgView;
-@property(nonatomic,strong)UILabel *titleLabel;
+
 @end
 @implementation LDCustomTabBarItem
--(id)initWithTitle:(NSString *)title textSize:(CGFloat)textSize textColor:(UIColor*)textColor highlightedTextColor:(UIColor*)highlightedTextColor  contentImage:(UIImage *)contentImg contentHighlightImage:(UIImage *)contentHImage{
+-(LDCustomTabBarItem*)initWithTitle:(NSString *)title textSize:(CGFloat)textSize textColor:(UIColor*)textColor highlightedTextColor:(UIColor*)highlightedTextColor  contentImage:(UIImage *)contentImg contentHighlightImage:(UIImage *)contentHImage{
     if (self = [super initWithFrame:CGRectZero]) {
-        UIImageView *contentImgView = [[UIImageView alloc] initWithImage:contentImg highlightedImage:contentHImage];
+        UIImageView *contentImgView = [[UIImageView alloc] initWithImage:contentImg];
+        self.textColor = textColor;
+        self.highlightedTextColor = highlightedTextColor;
+        self.contentImg = contentImg;
+        self.contentHImage = contentHImage;
         [contentImgView setUserInteractionEnabled:YES];
         [self addSubview:contentImgView];
         self.contentImgView = contentImgView;

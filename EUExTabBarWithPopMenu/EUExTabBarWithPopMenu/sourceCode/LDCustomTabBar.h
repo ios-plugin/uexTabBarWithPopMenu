@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LDCustomCenterItem.h"
 @protocol LDCustomTabBarDelegate;
 
 @interface LDCustomTabBar : UIView
 @property(nonatomic,weak)id <LDCustomTabBarDelegate> delegate;
-
-
--(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate;
+@property(nonatomic,strong)UIView *popMainBackView;
+@property(nonatomic,strong)LDCustomCenterItem *centerView;
+-(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate count:(NSInteger)count;
 
 -(void)setTabBarItems:(NSArray *)items;
 -(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance;
