@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:uexTabBarWithPopMenu.xcodeproj">
+      location = "self:EUExTabBarWithPopMenu.xcodeproj">
    </FileRef>
 </Workspace>
