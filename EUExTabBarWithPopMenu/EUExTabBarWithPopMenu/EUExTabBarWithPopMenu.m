@@ -97,12 +97,12 @@
     }
 
     /*-----------------------*/
-    self.tabBar = [[LDCustomTabBar alloc] initWithFrame:CGRectMake(x,y ,width, height) centerImage:[self readImageFromPath:centerImgSrc] backgroundColor:[EUtility ColorFromString:bgColor] statusColor:[EUtility ColorFromString:statusColor] delegate:self count:tabDataArr.count];
+    self.tabBar = [[LDCustomTabBar alloc] initWithFrame:CGRectMake(x,y ,width, height) centerImage:[self readImageFromPath:centerImgSrc] backgroundColor:[EUtility colorFromHTMLString:bgColor] statusColor:[EUtility colorFromHTMLString:statusColor] delegate:self count:tabDataArr.count];
     [EUtility brwView:self.meBrwView addSubview:self.tabBar];
     /*----------- set tab data------------*/
     NSMutableArray *itemButtons = [NSMutableArray arrayWithCapacity:tabDataArr.count];
     for (int i = 0; i < tabDataArr.count; i++) {
-       LDCustomTabBarItem *item = [[LDCustomTabBarItem alloc] initWithTitle:titleArr[i] textSize:tabTextSize textColor:[EUtility ColorFromString:tabTextNColor] highlightedTextColor:[EUtility ColorFromString:tabTextHColor]  contentImage:imageNArr[i] contentHighlightImage:imageHArr[i]];
+       LDCustomTabBarItem *item = [[LDCustomTabBarItem alloc] initWithTitle:titleArr[i] textSize:tabTextSize textColor:[EUtility colorFromHTMLString:tabTextNColor] highlightedTextColor:[EUtility colorFromHTMLString:tabTextHColor]  contentImage:imageNArr[i] contentHighlightImage:imageHArr[i]];
         
         item.tag = kBaseTag+i;
         UITapGestureRecognizer *tabTapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tabBarItemClick:)];
@@ -114,13 +114,13 @@
      /*------------------------*/
     NSMutableArray *popItemButtons = [NSMutableArray arrayWithCapacity:popDataArr.count];
     for (int i = 0; i < popDataArr.count; i++) {
-        LDPopMenuItem *item = [[LDPopMenuItem alloc] initWithTitle:popTitleArr[i] textSize:popTextSize textColor:[EUtility ColorFromString:popTextNColor] highlightedTextColor:[EUtility ColorFromString:popTextHColor] image:popImageNArr[i] selectedImage:popImageHArr[i]];
+        LDPopMenuItem *item = [[LDPopMenuItem alloc] initWithTitle:popTitleArr[i] textSize:popTextSize textColor:[EUtility colorFromHTMLString:popTextNColor] highlightedTextColor:[EUtility colorFromHTMLString:popTextHColor] image:popImageNArr[i] selectedImage:popImageHArr[i]];
         item.tag = kBaseTag+i;
         UITapGestureRecognizer *tabTapP = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popItemClick:)];
         [item addGestureRecognizer:tabTapP];
         [popItemButtons addObject:item];
     }
-    [self.tabBar setPopMenuItems:popItemButtons WithBackgroundColor:[EUtility ColorFromString:popBgColor] popMenuColor:[EUtility ColorFromString:popMenuColor] BottomDistance:bottomDistance];
+    [self.tabBar setPopMenuItems:popItemButtons WithBackgroundColor:[EUtility colorFromHTMLString:popBgColor] popMenuColor:[EUtility colorFromHTMLString:popMenuColor] BottomDistance:bottomDistance];
     /*------------------------*/
     currentOpenStaus = YES;
     

@@ -106,7 +106,7 @@ static CGFloat const kDefaultCenterHeight = 59;
 
     LDPopMenuView *containerView = [[LDPopMenuView alloc] initWithFrame:CGRectMake(0,[EUtility screenHeight] - bottomDistance,self.popMainBackView.frame.size.width , self.popMainBackView.frame.size.height - 200 ) items:self.popItems];
     [containerView setOpaque:YES];
-    [containerView setBackgroundColor:popMenuColor];
+    [containerView setBackgroundColor:[UIColor clearColor]];//popMenuColor];
     [self.popMainBackView addSubview:containerView];
     self.popContainerView = containerView;
 }
