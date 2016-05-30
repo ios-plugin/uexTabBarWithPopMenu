@@ -7,43 +7,60 @@
 //
 
 #import "LDPopMenuItem.h"
-//#import "UIView+Helpers.h"
+
 #define kDefaultTitleLabelTextColor [UIColor whiteColor]
 
 @interface LDPopMenuItem()
 @property(nonatomic,strong)UIImageView *contentImgView;
-@property(nonatomic,strong)UILabel *titleLab;
+
 @end
 @implementation LDPopMenuItem
 
 -(id)initWithTitle:(NSString *)title textSize:(CGFloat)textSize textColor:(UIColor*)textColor highlightedTextColor:(UIColor*)highlightedTextColor image:(UIImage *)image selectedImage:(UIImage *)selectedImage {
     if (self = [super initWithFrame:CGRectZero]) {
-        UIImageView *contentImgView = [[UIImageView alloc] initWithImage:image highlightedImage:selectedImage];
-        [contentImgView setUserInteractionEnabled:YES];
-        [self addSubview:contentImgView];
-        self.contentImgView = contentImgView;
-        UILabel *tLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [tLabel setBackgroundColor:[UIColor clearColor]];
-        [tLabel setText:title];
-        [tLabel setTextColor:textColor];
-        [tLabel setHighlightedTextColor:highlightedTextColor];
-        [tLabel setTextAlignment:NSTextAlignmentCenter];
-        //[tLabel setTextColor:textColor?textColor:kDefaultTitleLabelTextColor];
-        [tLabel setFont:[UIFont boldSystemFontOfSize:textSize]];
-        [self addSubview:tLabel];
-        self.titleLab = tLabel;
+
+        [self setImage:image forState:UIControlStateNormal];
+        [self setImage:selectedImage forState:UIControlStateSelected];
+        [self setTitle:title forState:UIControlStateNormal];
+        self.titleLabel.font = [UIFont systemFontOfSize:textSize];
+        [self setTitleColor:textColor forState:UIControlStateNormal];
+        [self setTitleColor:highlightedTextColor forState:UIControlStateHighlighted];
+        
+        
     }
     return self;
 
 }
--(void)layoutSubviews{
+-(void)layoutSubviews
+{
     [super layoutSubviews];
-    float imgW = self.contentImgView.image.size.width;
-    float imgH = self.contentImgView.image.size.height;
-    float contentW = MIN(imgW, self.frame.size.width);
-    float contentH = MIN(imgH, self.frame.size.height - 20);
-    [self.contentImgView setFrame:CGRectMake((self.frame.size.width - contentW)/2, 4, contentW,contentH)];
-    [self.titleLab setFrame:CGRectMake(0,_contentImgView.frame.origin.y+_contentImgView.frame.size.height+5, self.frame.size.width, 12)];
+    CGFloat midX = self.frame.size.width / 2;
+    CGFloat midY = self.frame.size.height/ 2 ;
+    
+    self.imageView.center = CGPointMake(midX, midY);
+    //self.titleLabel.center = CGPointMake(midX, midY +100);
+     CGSize imageSize = self.imageView.frame.size;
+    CGSize titleSize = self.titleLabel.frame.size;
+    NSLog(@"titleSize:%@",NSStringFromCGSize(titleSize));
+    // CGSize textSize = [self.titleLabel.text sizeWithFont:self.titleLabel.font];
+    self.titleEdgeInsets = UIEdgeInsetsMake(0, - imageSize.width-37.333333333333336, - (imageSize.height+20),  0);
+    //self.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0,  0);
+//    CGFloat selfWidth = self.frame.size.width;
+//    CGFloat selfHeight = self.frame.size.height;
+//    CGRect titleRect = self.titleLabel.frame;
+//    CGRect imageRect = CGRectMake(0, 0, self.imageView.frame.size.width, self.imageView.frame.size.height);//self.imageView.frame;
+//    CGFloat padding;
+//    
+//    CGFloat totalHeight = titleRect.size.height +padding +imageRect.size.height;
+//    self.titleEdgeInsets =UIEdgeInsetsMake(((selfHeight - totalHeight)/2 + imageRect.size.height + padding - titleRect.origin.y),
+//                                      (selfWidth/2 - titleRect.origin.x - titleRect.size.width /2) - (selfWidth - titleRect.size.width) /2,
+//                                      -((selfHeight - totalHeight)/2 + imageRect.size.height + padding - titleRect.origin.y),
+//                                      -(selfWidth/2 - titleRect.origin.x - titleRect.size.width /2) - (selfWidth - titleRect.size.width) /2);
+//    
+//    self.imageEdgeInsets =UIEdgeInsetsMake(((selfHeight - totalHeight)/2 - imageRect.origin.y),
+//                                      (selfWidth /2 - imageRect.origin.x - imageRect.size.width /2),
+//                                      -((selfHeight - totalHeight)/2 - imageRect.origin.y),
+//                                      -(selfWidth /2 - imageRect.origin.x - imageRect.size.width /2));
     
 }
 @end

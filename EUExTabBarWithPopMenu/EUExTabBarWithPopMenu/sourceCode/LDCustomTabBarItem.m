@@ -38,10 +38,10 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    float imgW = self.contentImgView.image.size.width;
-    float imgH = self.contentImgView.image.size.height;
+    float imgW = self.contentImgView.image.size.width/1.35;
+    float imgH = self.contentImgView.image.size.height/1.35;
     float contentW = MIN(imgW, self.frame.size.width);
-    float contentH = MIN(imgH, self.frame.size.height - 20);
+    float contentH = MIN(imgH, self.frame.size.height);
     [self.contentImgView setFrame:CGRectMake((self.frame.size.width - contentW)/2, 4, contentW,contentH)];
     [self.titleLabel setFrame:CGRectMake(0,_contentImgView.frame.origin.y+_contentImgView.frame.size.height+2, self.frame.size.width, 12)];
 

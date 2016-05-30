@@ -11,7 +11,6 @@
 		8457EC8F1A69565200F7C257 /* LDCustomCenterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC821A69565200F7C257 /* LDCustomCenterItem.m */; };
 		8457EC901A69565200F7C257 /* LDCustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC841A69565200F7C257 /* LDCustomTabBar.m */; };
 		8457EC911A69565200F7C257 /* LDCustomTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC861A69565200F7C257 /* LDCustomTabBarItem.m */; };
-		8457EC921A69565200F7C257 /* LDGridTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC881A69565200F7C257 /* LDGridTableViewCell.m */; };
 		8457EC941A69565200F7C257 /* LDPopMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC8C1A69565200F7C257 /* LDPopMenuItem.m */; };
 		8457EC951A69565200F7C257 /* LDPopMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC8E1A69565200F7C257 /* LDPopMenuView.m */; };
 /* End PBXBuildFile section */
@@ -47,8 +46,6 @@
 		8457EC841A69565200F7C257 /* LDCustomTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDCustomTabBar.m; sourceTree = "<group>"; };
 		8457EC851A69565200F7C257 /* LDCustomTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDCustomTabBarItem.h; sourceTree = "<group>"; };
 		8457EC861A69565200F7C257 /* LDCustomTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDCustomTabBarItem.m; sourceTree = "<group>"; };
-		8457EC871A69565200F7C257 /* LDGridTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGridTableViewCell.h; sourceTree = "<group>"; };
-		8457EC881A69565200F7C257 /* LDGridTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGridTableViewCell.m; sourceTree = "<group>"; };
 		8457EC8B1A69565200F7C257 /* LDPopMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDPopMenuItem.h; sourceTree = "<group>"; };
 		8457EC8C1A69565200F7C257 /* LDPopMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDPopMenuItem.m; sourceTree = "<group>"; };
 		8457EC8D1A69565200F7C257 /* LDPopMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDPopMenuView.h; sourceTree = "<group>"; };
@@ -106,8 +103,6 @@
 				8457EC841A69565200F7C257 /* LDCustomTabBar.m */,
 				8457EC851A69565200F7C257 /* LDCustomTabBarItem.h */,
 				8457EC861A69565200F7C257 /* LDCustomTabBarItem.m */,
-				8457EC871A69565200F7C257 /* LDGridTableViewCell.h */,
-				8457EC881A69565200F7C257 /* LDGridTableViewCell.m */,
 				8457EC8B1A69565200F7C257 /* LDPopMenuItem.h */,
 				8457EC8C1A69565200F7C257 /* LDPopMenuItem.m */,
 				8457EC8D1A69565200F7C257 /* LDPopMenuView.h */,
@@ -204,7 +199,6 @@
 				8457EC621A69552600F7C257 /* EUExTabBarWithPopMenu.m in Sources */,
 				8457EC901A69565200F7C257 /* LDCustomTabBar.m in Sources */,
 				8457EC941A69565200F7C257 /* LDPopMenuItem.m in Sources */,
-				8457EC921A69565200F7C257 /* LDGridTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

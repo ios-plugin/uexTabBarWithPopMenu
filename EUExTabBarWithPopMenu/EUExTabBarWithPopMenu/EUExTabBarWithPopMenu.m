@@ -98,12 +98,11 @@
 
     /*-----------------------*/
     self.tabBar = [[LDCustomTabBar alloc] initWithFrame:CGRectMake(x,y ,width, height) centerImage:[self readImageFromPath:centerImgSrc] backgroundColor:[EUtility colorFromHTMLString:bgColor] statusColor:[EUtility colorFromHTMLString:statusColor] delegate:self count:tabDataArr.count];
-    [EUtility brwView:self.meBrwView addSubview:self.tabBar];
+    
     /*----------- set tab data------------*/
     NSMutableArray *itemButtons = [NSMutableArray arrayWithCapacity:tabDataArr.count];
     for (int i = 0; i < tabDataArr.count; i++) {
        LDCustomTabBarItem *item = [[LDCustomTabBarItem alloc] initWithTitle:titleArr[i] textSize:tabTextSize textColor:[EUtility colorFromHTMLString:tabTextNColor] highlightedTextColor:[EUtility colorFromHTMLString:tabTextHColor]  contentImage:imageNArr[i] contentHighlightImage:imageHArr[i]];
-        
         item.tag = kBaseTag+i;
         UITapGestureRecognizer *tabTapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tabBarItemClick:)];
         [item addGestureRecognizer:tabTapG];
@@ -116,14 +115,18 @@
     for (int i = 0; i < popDataArr.count; i++) {
         LDPopMenuItem *item = [[LDPopMenuItem alloc] initWithTitle:popTitleArr[i] textSize:popTextSize textColor:[EUtility colorFromHTMLString:popTextNColor] highlightedTextColor:[EUtility colorFromHTMLString:popTextHColor] image:popImageNArr[i] selectedImage:popImageHArr[i]];
         item.tag = kBaseTag+i;
-        UITapGestureRecognizer *tabTapP = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popItemClick:)];
-        [item addGestureRecognizer:tabTapP];
+        [item addTarget:self action:@selector(popItemClick:) forControlEvents:UIControlEventTouchUpInside];
+        //UITapGestureRecognizer *tabTapP = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popItemClick:)];
+        //UILongPressGestureRecognizer *longPressP = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(popxItemClick:)];
+        //[item addGestureRecognizer:tabTapP];
+        //[item addGestureRecognizer:longPressP];
+        //[tabTapP requireGestureRecognizerToFail:longPressP];
         [popItemButtons addObject:item];
     }
     [self.tabBar setPopMenuItems:popItemButtons WithBackgroundColor:[EUtility colorFromHTMLString:popBgColor] popMenuColor:[EUtility colorFromHTMLString:popMenuColor] BottomDistance:bottomDistance];
     /*------------------------*/
     currentOpenStaus = YES;
-    
+    [EUtility brwView:self.meBrwView addSubview:self.tabBar];
 }
 -(void)setItemChecked:(NSMutableArray *)inArguments{
     if(inArguments.count<1){
@@ -146,14 +149,13 @@
     NSDictionary *dic = @{@"index":@(idx)};
     [self callBackJsonWithFunction:@"onTabItemClick" parameter:dic];
 }
--(void)popItemClick:(UITapGestureRecognizer *)gesture{
-    UIView *v = gesture.view;
-    int idx = (int)v.tag - kBaseTag;
+-(void)popItemClick:(UIButton*)gesture{
+    int idx = (int)gesture.tag - kBaseTag;
      NSDictionary *dic = @{@"index":@(idx)};
     self.tabBar.popMainBackView.hidden = YES;
     [self.tabBar.centerView resetAnimations];
     [self callBackJsonWithFunction:@"onPopMenuItemClick" parameter:dic];
-
+  
 }
 -(void)close:(NSMutableArray *)array{
     currentOpenStaus = NO;
@@ -162,6 +164,7 @@
         self.tabBar = nil;
     }
 }
+
 #pragma mark - CallBack Method
 const static NSString *kPluginName=@"uexTabBarWithPopMenu";
 -(void)callBackJsonWithFunction:(NSString *)functionName parameter:(id)obj{

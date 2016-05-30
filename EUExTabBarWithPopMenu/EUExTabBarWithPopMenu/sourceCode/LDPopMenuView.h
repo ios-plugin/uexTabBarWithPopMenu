@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 @interface LDPopMenuView :UIView
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)UIView *tableView;
 -(id)initWithFrame:(CGRect)frame items:(NSArray *)items;
 @end
