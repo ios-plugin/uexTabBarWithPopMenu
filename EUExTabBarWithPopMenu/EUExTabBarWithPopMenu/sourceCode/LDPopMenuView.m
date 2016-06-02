@@ -9,7 +9,7 @@
 #import "LDPopMenuView.h"
 #import "LDPopMenuItem.h"
 #define kDefaultPreRowCount  4
-//#define kDefaultItemH 80
+#define kDefaultItemH 80
 #define kDefaultItemSpace 20
 @interface LDPopMenuView() 
 @property(nonatomic,strong)NSArray *datas;

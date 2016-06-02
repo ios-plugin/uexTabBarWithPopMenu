@@ -14,6 +14,7 @@
 @property(nonatomic,weak)id <LDCustomTabBarDelegate> delegate;
 @property(nonatomic,strong)UIView *popMainBackView;
 @property(nonatomic,strong)LDCustomCenterItem *centerView;
+
 -(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate count:(NSInteger)count;
 
 -(void)setTabBarItems:(NSArray *)items;

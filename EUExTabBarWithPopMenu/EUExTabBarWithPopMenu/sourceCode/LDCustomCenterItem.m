@@ -23,6 +23,7 @@
         [contentImgView addGestureRecognizer:centerTapG];
         [self addSubview:contentImgView];
         self.contentImgView = contentImgView;
+       
     }
     return self;
 }

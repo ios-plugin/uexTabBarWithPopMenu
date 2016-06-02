@@ -27,12 +27,14 @@ static CGFloat const kDefaultCenterHeight = 59;
 @property(nonatomic,strong)NSArray *tabItems;
 @property(nonatomic,strong)NSArray *popItems;
 @property(nonatomic,strong)UIView *statusView;
-
+@property(nonatomic,strong)LDPopMenuView *containerView;
 @property(nonatomic,assign)NSInteger currentIndex;
 @property(nonatomic,strong)UIColor *statusColor;
 @property(nonatomic,strong)LDPopMenuView *popContainerView;
 @property(nonatomic,strong)NSMutableArray *selectArr;
 @property(nonatomic,assign)NSInteger count;
+@property(nonatomic,strong)UIImage *centerImage;
+@property(nonatomic,assign)CGFloat bottom;
 @end
 @implementation LDCustomTabBar
 -(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate count:(NSInteger)count{
@@ -53,6 +55,7 @@ static CGFloat const kDefaultCenterHeight = 59;
 }
 -(void)drawCenterItemWithCenterImage:(UIImage*)centerImage{
     LDCustomCenterItem *centerItem = [[LDCustomCenterItem alloc] initWithFrame:CGRectMake((self.frame.size.width - kDefaultCenterWidth)*0.5, self.frame.size.height - kDefaultCenterHeight, kDefaultCenterWidth, kDefaultCenterHeight) contentImg:centerImage];
+    self.centerImage = centerImage;
     centerItem.delegate = self;
     [self addSubview:centerItem];
     self.centerView = centerItem;
@@ -90,6 +93,7 @@ static CGFloat const kDefaultCenterHeight = 59;
 
 }
 -(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance Titles:(NSArray*)titles{
+    self.bottom = bottomDistance;
     self.popItems = items;
     [self addPopItemsWithBackgroundColor:bgColor popMenuColor:popMenuColor bottomDistance:bottomDistance Titles:titles];
 }
@@ -104,11 +108,12 @@ static CGFloat const kDefaultCenterHeight = 59;
 }
 -(void)drawPopContainerVieWWithBottomDistance:(CGFloat)bottomDistance popMenuColor:(UIColor*)popMenuColor Titles:(NSArray*)titles{
 
-    LDPopMenuView *containerView = [[LDPopMenuView alloc] initWithFrame:CGRectMake(0,[EUtility screenHeight] - bottomDistance,self.popMainBackView.frame.size.width , self.popMainBackView.frame.size.height - 200 ) items:self.popItems Title:titles];
-    [containerView setOpaque:YES];
-    [containerView setBackgroundColor:[UIColor clearColor]];//popMenuColor];
-    [self.popMainBackView addSubview:containerView];
-    self.popContainerView = containerView;
+    self.containerView = [[LDPopMenuView alloc] initWithFrame:CGRectMake(0,[EUtility screenHeight] - bottomDistance,self.popMainBackView.frame.size.width , self.popMainBackView.frame.size.height - 200 ) items:self.popItems Title:titles];
+    [self.containerView setOpaque:YES];
+    [self.containerView setBackgroundColor:[UIColor clearColor]];//popMenuColor];
+    [self.popMainBackView addSubview:self.containerView];
+    //self.popMainBackView.backgroundColor = [UIColor clearColor];
+    
 }
 -(void)popMainBackTap:(UIGestureRecognizer *)tapG{
     UIView *gView = tapG.view;
@@ -133,12 +138,24 @@ static CGFloat const kDefaultCenterHeight = 59;
         return;
     }
     self.popMainBackView.hidden = NO;
-    //CGRect frame = self.centerView.frame;
-    //[self.popContainerView addSubview:self.centerView.contentImgView];
-    //[self.centerView.contentImgView setFrame:CGRectMake(5, 5, frame.size.width - 10, frame.size.width - 10)];
-    //[self insertSubview:self.centerView.contentImgView  aboveSubview:self.popContainerView];
-    //[self bringSubviewToFront:self.centerView];
+    LDCustomCenterItem *centerItem = nil;
+    if (!isExpanding) {
+       centerItem = [[LDCustomCenterItem alloc] initWithFrame:CGRectMake((self.frame.size.width - kDefaultCenterWidth)*0.5, self.bottom -50+self.frame.size.height - kDefaultCenterHeight, kDefaultCenterWidth, kDefaultCenterHeight) contentImg:self.centerImage];
+        UITapGestureRecognizer *mainBackTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(centerTap:)];
+        [centerItem resetAnimations];
+        [centerItem.contentImgView addGestureRecognizer:mainBackTap];
+        [self.containerView addSubview:centerItem];
   
+    }else{
+        [centerItem removeFromSuperview];
+    }
+    
+}
+-(void)centerTap:(UIGestureRecognizer *)tapG{
+    UIView *gView = tapG.view;
+    [gView setHidden:YES];
+    self.popMainBackView.hidden = YES;
+    [self.centerView resetAnimations];
 }
 -(void)changeCurrentStatusViewWithIndex:(int)index{
     
