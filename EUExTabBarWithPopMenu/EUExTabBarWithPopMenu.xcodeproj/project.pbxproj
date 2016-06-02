@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09F76E971CFFC71500F3C570 /* UIView+Extenssion.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F76E961CFFC71500F3C570 /* UIView+Extenssion.m */; };
 		8457EC621A69552600F7C257 /* EUExTabBarWithPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC611A69552600F7C257 /* EUExTabBarWithPopMenu.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8457EC8F1A69565200F7C257 /* LDCustomCenterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC821A69565200F7C257 /* LDCustomCenterItem.m */; };
 		8457EC901A69565200F7C257 /* LDCustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC841A69565200F7C257 /* LDCustomTabBar.m */; };
@@ -28,6 +29,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		09F76E951CFFC71500F3C570 /* UIView+Extenssion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extenssion.h"; sourceTree = "<group>"; };
+		09F76E961CFFC71500F3C570 /* UIView+Extenssion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extenssion.m"; sourceTree = "<group>"; };
 		8457EC5C1A69552600F7C257 /* libuexTabBarWithPopMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuexTabBarWithPopMenu.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8457EC5F1A69552600F7C257 /* EUExTabBarWithPopMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EUExTabBarWithPopMenu.h; sourceTree = "<group>"; };
 		8457EC611A69552600F7C257 /* EUExTabBarWithPopMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EUExTabBarWithPopMenu.m; sourceTree = "<group>"; };
@@ -107,6 +110,8 @@
 				8457EC8C1A69565200F7C257 /* LDPopMenuItem.m */,
 				8457EC8D1A69565200F7C257 /* LDPopMenuView.h */,
 				8457EC8E1A69565200F7C257 /* LDPopMenuView.m */,
+				09F76E951CFFC71500F3C570 /* UIView+Extenssion.h */,
+				09F76E961CFFC71500F3C570 /* UIView+Extenssion.m */,
 			);
 			path = sourceCode;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				8457EC621A69552600F7C257 /* EUExTabBarWithPopMenu.m in Sources */,
 				8457EC901A69565200F7C257 /* LDCustomTabBar.m in Sources */,
 				8457EC941A69565200F7C257 /* LDPopMenuItem.m in Sources */,
+				09F76E971CFFC71500F3C570 /* UIView+Extenssion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -123,7 +123,7 @@
         //[tabTapP requireGestureRecognizerToFail:longPressP];
         [popItemButtons addObject:item];
     }
-    [self.tabBar setPopMenuItems:popItemButtons WithBackgroundColor:[EUtility colorFromHTMLString:popBgColor] popMenuColor:[EUtility colorFromHTMLString:popMenuColor] BottomDistance:bottomDistance];
+    [self.tabBar setPopMenuItems:popItemButtons WithBackgroundColor:[EUtility colorFromHTMLString:popBgColor] popMenuColor:[EUtility colorFromHTMLString:popMenuColor] BottomDistance:bottomDistance Titles:popTitleArr];
     /*------------------------*/
     currentOpenStaus = YES;
     [EUtility brwView:self.meBrwView addSubview:self.tabBar];

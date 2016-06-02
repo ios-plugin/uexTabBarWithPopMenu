@@ -89,9 +89,9 @@ static CGFloat const kDefaultCenterHeight = 59;
     }
 
 }
--(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance {
+-(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance Titles:(NSArray*)titles{
     self.popItems = items;
-    [self addPopItemsWithBackgroundColor:bgColor popMenuColor:popMenuColor bottomDistance:bottomDistance];
+    [self addPopItemsWithBackgroundColor:bgColor popMenuColor:popMenuColor bottomDistance:bottomDistance Titles:titles];
 }
 -(void)drawBackgroundView:(UIColor *)bgColor{
     UIView *mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [EUtility screenWidth], [EUtility screenHeight])];
@@ -102,9 +102,9 @@ static CGFloat const kDefaultCenterHeight = 59;
     [[UIApplication sharedApplication].keyWindow addSubview:mainView];
     self.popMainBackView = mainView;
 }
--(void)drawPopContainerVieWWithBottomDistance:(CGFloat)bottomDistance popMenuColor:(UIColor*)popMenuColor{
+-(void)drawPopContainerVieWWithBottomDistance:(CGFloat)bottomDistance popMenuColor:(UIColor*)popMenuColor Titles:(NSArray*)titles{
 
-    LDPopMenuView *containerView = [[LDPopMenuView alloc] initWithFrame:CGRectMake(0,[EUtility screenHeight] - bottomDistance,self.popMainBackView.frame.size.width , self.popMainBackView.frame.size.height - 200 ) items:self.popItems];
+    LDPopMenuView *containerView = [[LDPopMenuView alloc] initWithFrame:CGRectMake(0,[EUtility screenHeight] - bottomDistance,self.popMainBackView.frame.size.width , self.popMainBackView.frame.size.height - 200 ) items:self.popItems Title:titles];
     [containerView setOpaque:YES];
     [containerView setBackgroundColor:[UIColor clearColor]];//popMenuColor];
     [self.popMainBackView addSubview:containerView];
@@ -115,9 +115,9 @@ static CGFloat const kDefaultCenterHeight = 59;
     [gView setHidden:YES];
     [self.centerView resetAnimations];
 }
--(void)addPopItemsWithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor bottomDistance:(CGFloat)bottomDistance{
+-(void)addPopItemsWithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor bottomDistance:(CGFloat)bottomDistance Titles:(NSArray*)titles{
     [self drawBackgroundView:bgColor];
-    [self drawPopContainerVieWWithBottomDistance:bottomDistance popMenuColor:popMenuColor];
+    [self drawPopContainerVieWWithBottomDistance:bottomDistance popMenuColor:popMenuColor Titles:titles];
 
 }
 -(void)selectTabItemWithIndex:(int)index{

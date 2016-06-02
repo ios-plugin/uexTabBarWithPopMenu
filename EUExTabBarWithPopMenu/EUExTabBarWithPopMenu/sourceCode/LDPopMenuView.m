@@ -8,30 +8,30 @@
 
 #import "LDPopMenuView.h"
 #import "LDPopMenuItem.h"
-//#import "UIView+Helpers.h"
 #define kDefaultPreRowCount  4
 #define kDefaultItemH 80
 #define kDefaultItemSpace 20
-@interface LDPopMenuView() //<UITableViewDataSource,UITableViewDelegate>
+@interface LDPopMenuView() 
 @property(nonatomic,strong)NSArray *datas;
 @property(nonatomic,assign)CGFloat itemWidth;
 @end
 @implementation LDPopMenuView
--(id)initWithFrame:(CGRect)frame items:(NSArray *)items{
+-(id)initWithFrame:(CGRect)frame items:(NSArray *)items Title:(NSArray*)titles{
     if (self = [super initWithFrame:frame]) {
         self.datas = items;
         [self calculateItemWidth];
-        [self drawGirdView];
+        [self drawGirdViewWithTitle:titles];
     }
     return self;
 }
--(void)drawGirdView{
+-(void)drawGirdViewWithTitle:(NSArray*)titles{
     UIView *tableView = [[UIView alloc] initWithFrame:self.bounds];
     [tableView setBackgroundColor:[UIColor clearColor]];
     [self addSubview:tableView];
     self.tableView = tableView;
     for (int i = 0; i < self.datas.count; i++) {
          LDPopMenuItem *item = [self.datas objectAtIndex:i];
+        [item setTitle:titles[i] forState:UIControlStateNormal];
         item.backgroundColor = [UIColor clearColor];
         int count = i/kDefaultPreRowCount;
         int countRow = i%kDefaultPreRowCount;

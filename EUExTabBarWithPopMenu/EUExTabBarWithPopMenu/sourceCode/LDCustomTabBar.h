@@ -17,8 +17,8 @@
 -(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate count:(NSInteger)count;
 
 -(void)setTabBarItems:(NSArray *)items;
--(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance;
--(void)selectTabItemWithIndex:(int)index;
+-(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance Titles:(NSArray*)titles;
+-(void)selectTabItemWithIndex:(int)index; 
 
 @end
 
