@@ -24,8 +24,6 @@
         self.titleLabel.font = [UIFont systemFontOfSize:textSize];
         [self setTitleColor:textColor forState:UIControlStateNormal];
         [self setTitleColor:highlightedTextColor forState:UIControlStateHighlighted];
-        
-        
     }
     return self;
 

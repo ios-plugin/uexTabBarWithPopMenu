@@ -31,9 +31,10 @@
     if (currentOpenStaus == YES) {
         return;
     }
+   
     id info=[inArguments[0] JSONValue];
     float x = [[info objectForKey:@"left"] floatValue]?:0;
-    float hei = 50;//0.068*[EUtility screenHeight];
+    float hei = 50;//0.1*[EUtility screenHeight];
     float width = [[info objectForKey:@"width"] floatValue]?:[EUtility screenWidth];
     float height = [[info objectForKey:@"height"] floatValue]?:hei;
      float y = [[info objectForKey:@"top"] floatValue]?:[EUtility screenHeight] -height ;
@@ -172,4 +173,5 @@ const static NSString *kPluginName=@"uexTabBarWithPopMenu";
     [EUtility brwView:self.meBrwView evaluateScript:jsonStr];
     
 }
+
 @end

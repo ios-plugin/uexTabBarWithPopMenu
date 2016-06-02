@@ -9,7 +9,7 @@
 #import "LDPopMenuView.h"
 #import "LDPopMenuItem.h"
 #define kDefaultPreRowCount  4
-#define kDefaultItemH 80
+//#define kDefaultItemH 80
 #define kDefaultItemSpace 20
 @interface LDPopMenuView() 
 @property(nonatomic,strong)NSArray *datas;
@@ -35,7 +35,7 @@
         item.backgroundColor = [UIColor clearColor];
         int count = i/kDefaultPreRowCount;
         int countRow = i%kDefaultPreRowCount;
-        item.frame = CGRectMake(kDefaultItemSpace + ((_itemWidth + kDefaultItemSpace) * countRow),  count*(kDefaultItemH+25), _itemWidth, kDefaultItemH);
+        item.frame = CGRectMake(kDefaultItemSpace + ((_itemWidth + kDefaultItemSpace) * countRow),  count*(self.itemWidth+25), _itemWidth, self.itemWidth);
         [self.tableView addSubview:item];
     }
 }
