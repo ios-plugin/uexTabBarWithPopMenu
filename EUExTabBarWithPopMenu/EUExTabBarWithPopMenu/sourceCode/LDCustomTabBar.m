@@ -35,13 +35,15 @@ static CGFloat const kDefaultCenterHeight = 59;
 @property(nonatomic,assign)NSInteger count;
 @property(nonatomic,strong)UIImage *centerImage;
 @property(nonatomic,assign)CGFloat bottom;
+@property(nonatomic,strong)NSString *statusStr;
 @end
 @implementation LDCustomTabBar
--(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate count:(NSInteger)count{
+-(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate count:(NSInteger)count statusColorStr:(NSString *)str{
     if (self = [super initWithFrame:frame]) {
         [self setBackgroundColor:backgroundColor];
         self.delegate = delegate;
         self.statusColor = statusColor;
+        self.statusStr = str;
         self.count = count;
         self.selectArr = [NSMutableArray array];
         for (int i = 0; i < count; i++) {
@@ -204,7 +206,14 @@ static CGFloat const kDefaultCenterHeight = 59;
     int index = [x intValue];
     LDCustomTabBarItem *itemView = self.tabItems[index];
     itemView.contentImgView.image = itemView.contentHImage;
-    itemView.titleLabel.textColor = self.statusColor;
+    if ([self.statusStr isEqualToString:@"#ffffff"] || [self.statusStr isEqualToString:@"#ffffff"]) {
+        [itemView.titleLabel setTextColor:itemView.highlightedTextColor];
+        
+    }else{
+         itemView.titleLabel.textColor = self.statusColor;
+    }
+    
+    
     }
     
  -(void)cancelIndex:(NSNumber*)x{

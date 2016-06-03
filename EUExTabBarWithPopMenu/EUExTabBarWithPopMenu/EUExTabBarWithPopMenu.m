@@ -38,8 +38,8 @@
     float width = [[info objectForKey:@"width"] floatValue]?:[EUtility screenWidth];
     float height = [[info objectForKey:@"height"] floatValue]?:hei;
      float y = [[info objectForKey:@"top"] floatValue]?:[EUtility screenHeight] -height ;
-    NSString *statusColor = [info objectForKey:@"statusColor"]?:@"#EA7C24";
-    NSDictionary *tabDic = [info objectForKey:@"tab"];
+     NSDictionary *tabDic = [info objectForKey:@"tab"];
+     NSString *statusColor = [info objectForKey:@"statusColor"]?:@"#EA7C24";
     float tabTextSize = [[tabDic objectForKey:@"textSize"] floatValue]?:10;
     NSString *tabTextNColor = [tabDic objectForKey:@"textNColor"]?:@"#000000";
     NSString *tabTextHColor = [tabDic objectForKey:@"textHColor"]?:@"#FFFFFF";
@@ -98,7 +98,7 @@
     }
 
     /*-----------------------*/
-    self.tabBar = [[LDCustomTabBar alloc] initWithFrame:CGRectMake(x,y ,width, height) centerImage:[self readImageFromPath:centerImgSrc] backgroundColor:[EUtility colorFromHTMLString:bgColor] statusColor:[EUtility colorFromHTMLString:statusColor] delegate:self count:tabDataArr.count];
+    self.tabBar = [[LDCustomTabBar alloc] initWithFrame:CGRectMake(x,y ,width, height) centerImage:[self readImageFromPath:centerImgSrc] backgroundColor:[EUtility colorFromHTMLString:bgColor] statusColor:[EUtility colorFromHTMLString:statusColor] delegate:self count:tabDataArr.count statusColorStr:[info objectForKey:@"statusColor"]];
     
     /*----------- set tab data------------*/
     NSMutableArray *itemButtons = [NSMutableArray arrayWithCapacity:tabDataArr.count];
@@ -108,6 +108,7 @@
         UITapGestureRecognizer *tabTapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tabBarItemClick:)];
         [item addGestureRecognizer:tabTapG];
         [itemButtons addObject:item];
+        
         
     }
     [self.tabBar setTabBarItems:itemButtons];
@@ -123,11 +124,18 @@
         //[item addGestureRecognizer:longPressP];
         //[tabTapP requireGestureRecognizerToFail:longPressP];
         [popItemButtons addObject:item];
+       
     }
     [self.tabBar setPopMenuItems:popItemButtons WithBackgroundColor:[EUtility colorFromHTMLString:popBgColor] popMenuColor:[EUtility colorFromHTMLString:popMenuColor] BottomDistance:bottomDistance Titles:popTitleArr];
     /*------------------------*/
     currentOpenStaus = YES;
     [EUtility brwView:self.meBrwView addSubview:self.tabBar];
+    [imageHArr removeAllObjects];
+    [imageNArr removeAllObjects];
+    [titleArr removeAllObjects];
+    [popTitleArr removeAllObjects];
+    [popImageHArr removeAllObjects];
+    [popImageNArr removeAllObjects];
 }
 -(void)setItemChecked:(NSMutableArray *)inArguments{
     if(inArguments.count<1){

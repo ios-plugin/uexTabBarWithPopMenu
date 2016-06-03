@@ -19,7 +19,7 @@
 -(id)initWithTitle:(NSString *)title textSize:(CGFloat)textSize textColor:(UIColor*)textColor highlightedTextColor:(UIColor*)highlightedTextColor image:(UIImage *)image selectedImage:(UIImage *)selectedImage {
     if (self = [super initWithFrame:CGRectZero]) {
         [self setImage:image forState:UIControlStateNormal];
-        [self setImage:selectedImage forState:UIControlStateSelected];
+        [self setImage:selectedImage forState:UIControlStateHighlighted];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         self.titleLabel.font = [UIFont systemFontOfSize:textSize];
         [self setTitleColor:textColor forState:UIControlStateNormal];
