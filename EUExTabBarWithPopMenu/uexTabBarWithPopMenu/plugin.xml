@@ -4,7 +4,7 @@
         <method name="open"></method>
         <method name="close"></method>
         <method name="setItemChecked"></method>
-       
-       
+        <method name="setBadage"></method>
+        <method name="removeBadage"></method>
     </plugin>
 </uexplugins>

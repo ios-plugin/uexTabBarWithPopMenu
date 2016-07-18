@@ -14,7 +14,9 @@
 #define kBaseTag 1245
 @interface EUExTabBarWithPopMenu(){
     BOOL currentOpenStaus;
+    BOOL setBadage;
 }
+@property(nonatomic,strong)NSMutableDictionary *badageDic;
 @end
 @implementation EUExTabBarWithPopMenu
 -(id)initWithBrwView:(EBrowserView *)eInBrwView{
@@ -25,6 +27,7 @@
     return self;
 }
 -(void)open:(NSMutableArray *)inArguments{
+    self.badageDic = [NSMutableDictionary dictionary];
     if(inArguments.count<1){
         return;
     }
@@ -37,14 +40,18 @@
     float hei = 50;//0.1*[EUtility screenHeight];
     float width = [[info objectForKey:@"width"] floatValue]?:[EUtility screenWidth];
     float height = [[info objectForKey:@"height"] floatValue]?:hei;
-     float y = [[info objectForKey:@"top"] floatValue]?:[EUtility screenHeight] -height ;
-     NSDictionary *tabDic = [info objectForKey:@"tab"];
-     NSString *statusColor = [info objectForKey:@"statusColor"]?:@"#EA7C24";
+    float y = [[info objectForKey:@"top"] floatValue]?:[EUtility screenHeight] -height ;
+    NSDictionary *tabDic = [info objectForKey:@"tab"];
+    NSString *statusColor = [info objectForKey:@"statusColor"]?:@"#EA7C24";
+    NSString *pageBgColor = [info objectForKey:@"indicatorColor"]?:@"#EA7C24";
+    NSString *pageCurrentColor = [info objectForKey:@"indicatorSelectColor"]?:@"#EE0000";
     float tabTextSize = [[tabDic objectForKey:@"textSize"] floatValue]?:10;
     NSString *tabTextNColor = [tabDic objectForKey:@"textNColor"]?:@"#000000";
     NSString *tabTextHColor = [tabDic objectForKey:@"textHColor"]?:@"#FFFFFF";
     NSString *centerImgSrc = [tabDic objectForKey:@"centerImg"];
     NSString *bgColor = [tabDic objectForKey:@"bgColor"]?:@"#FFFFFF";
+    
+    
     /*-----------tab data------------*/
     NSArray *tabDataArr = [tabDic objectForKey:@"data"];
     NSMutableArray *imageNArr = [NSMutableArray arrayWithCapacity:tabDataArr.count];
@@ -75,27 +82,28 @@
     NSString *popTextHColor = [popMenuDic objectForKey:@"textHColor"]?:@"#FFFFFF";
     NSString *popBgColor = [popMenuDic objectForKey:@"bgColor"]?:@"#66ffffff";
     NSString *popMenuColor = [popMenuDic objectForKey:@"popMenuColor"]?:@"#66ffffff";
-    NSArray *popDataArr = [popMenuDic objectForKey:@"data"];
-    NSMutableArray *popImageNArr = [NSMutableArray arrayWithCapacity:popDataArr.count];
-    NSMutableArray *popImageHArr = [NSMutableArray arrayWithCapacity:popDataArr.count];
-    NSMutableArray *popTitleArr = [NSMutableArray arrayWithCapacity:popDataArr.count];
-    for (NSDictionary *dic in popDataArr) {
-        NSString *iconH = [dic objectForKey:@"iconH"];
-        NSString *iconN = [dic objectForKey:@"iconN"];
-        NSString *title = [dic objectForKey:@"title"];
-        if (iconH) {
-            [popImageHArr addObject:[self readImageFromPath:iconH]];
-        }
-        if (iconN) {
-            [popImageNArr addObject:[self readImageFromPath:iconN]];
-        }
-        if (title) {
-            [popTitleArr addObject:title];
-        }
-    }
-    if (popImageNArr.count != popImageHArr.count ||popTitleArr.count != popImageHArr.count) {
-        return;
-    }
+    NSArray *dataArr = [popMenuDic objectForKey:@"data"];
+    //NSArray *popDataArr = dataArr[0];
+//    NSMutableArray *popImageNArr = [NSMutableArray arrayWithCapacity:popDataArr.count];
+//    NSMutableArray *popImageHArr = [NSMutableArray arrayWithCapacity:popDataArr.count];
+//    NSMutableArray *popTitleArr = [NSMutableArray arrayWithCapacity:popDataArr.count];
+//    for (NSDictionary *dic in popDataArr) {
+//        NSString *iconH = [dic objectForKey:@"iconH"];
+//        NSString *iconN = [dic objectForKey:@"iconN"];
+//        NSString *title = [dic objectForKey:@"title"];
+//        if (iconH) {
+//            [popImageHArr addObject:[self readImageFromPath:iconH]];
+//        }
+//        if (iconN) {
+//            [popImageNArr addObject:[self readImageFromPath:iconN]];
+//        }
+//        if (title) {
+//            [popTitleArr addObject:title];
+//        }
+//    }
+//    if (popImageNArr.count != popImageHArr.count ||popTitleArr.count != popImageHArr.count) {
+//        return;
+//    }
 
     /*-----------------------*/
     self.tabBar = [[LDCustomTabBar alloc] initWithFrame:CGRectMake(x,y ,width, height) centerImage:[self readImageFromPath:centerImgSrc] backgroundColor:[EUtility colorFromHTMLString:bgColor] statusColor:[EUtility colorFromHTMLString:statusColor] delegate:self count:tabDataArr.count statusColorStr:[info objectForKey:@"statusColor"]];
@@ -112,30 +120,16 @@
         
     }
     [self.tabBar setTabBarItems:itemButtons];
-     /*------------------------*/
-    NSMutableArray *popItemButtons = [NSMutableArray arrayWithCapacity:popDataArr.count];
-    for (int i = 0; i < popDataArr.count; i++) {
-        LDPopMenuItem *item = [[LDPopMenuItem alloc] initWithTitle:popTitleArr[i] textSize:popTextSize textColor:[EUtility colorFromHTMLString:popTextNColor] highlightedTextColor:[EUtility colorFromHTMLString:popTextHColor] image:popImageNArr[i] selectedImage:popImageHArr[i]];
-        item.tag = kBaseTag+i;
-        [item addTarget:self action:@selector(popItemClick:) forControlEvents:UIControlEventTouchUpInside];
-        //UITapGestureRecognizer *tabTapP = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popItemClick:)];
-        //UILongPressGestureRecognizer *longPressP = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(popxItemClick:)];
-        //[item addGestureRecognizer:tabTapP];
-        //[item addGestureRecognizer:longPressP];
-        //[tabTapP requireGestureRecognizerToFail:longPressP];
-        [popItemButtons addObject:item];
-       
-    }
-    [self.tabBar setPopMenuItems:popItemButtons WithBackgroundColor:[EUtility colorFromHTMLString:popBgColor] popMenuColor:[EUtility colorFromHTMLString:popMenuColor] BottomDistance:bottomDistance Titles:popTitleArr];
+     /*----------set pop data--------------*/
+   
+    [self.tabBar setPopMenuItems:dataArr WithBackgroundColor:[EUtility colorFromHTMLString:popBgColor] popMenuColor:[EUtility colorFromHTMLString:popMenuColor] BottomDistance:bottomDistance popTextSize:popTextSize popTextNColor:popTextNColor popTextHColor:popTextHColor Obj:meBrwView pageBgColor:[EUtility colorFromHTMLString:pageBgColor] pageCurrentColor:[EUtility colorFromHTMLString:pageCurrentColor]];
     /*------------------------*/
     currentOpenStaus = YES;
     [EUtility brwView:self.meBrwView addSubview:self.tabBar];
     [imageHArr removeAllObjects];
     [imageNArr removeAllObjects];
     [titleArr removeAllObjects];
-    [popTitleArr removeAllObjects];
-    [popImageHArr removeAllObjects];
-    [popImageNArr removeAllObjects];
+
 }
 -(void)setItemChecked:(NSMutableArray *)inArguments{
     if(inArguments.count<1){
@@ -145,6 +139,55 @@
     int index = [[info objectForKey:@"index"]intValue];
     [self.tabBar selectTabItemWithIndex:index];
 
+}
+-(void)setBadage:(NSMutableArray *)inArguments{
+    if (setBadage) {
+        return;
+    }
+    if(inArguments.count<1){
+        return;
+    }
+    id info=[inArguments[0] JSONValue];
+    NSArray *indexArr = [info objectForKey:@"indexes"];
+    for (int i = 0; i < indexArr.count; i++) {
+        int index = [indexArr[i] intValue];
+        NSInteger tag = index + kBaseTag;
+        LDCustomTabBarItem *barItemView = (LDCustomTabBarItem*)[self.tabBar viewWithTag:tag];
+        CGRect frame = barItemView.frame;
+        NSLog(@"%@",NSStringFromCGRect(frame));
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 5)];
+        view.center = CGPointMake(frame.origin.x + frame.size.width-15, frame.origin.y+5);
+        view.backgroundColor = [UIColor redColor];
+        [view.layer setBorderColor:[UIColor redColor].CGColor];
+        [view.layer setCornerRadius:2.0];
+        view.layer.masksToBounds = YES;
+        NSString *id = [@(tag) stringValue];
+        [self.badageDic setObject:view forKey:id];
+        [self.tabBar addSubview:view];
+    }
+    setBadage = YES;
+    
+}
+-(void)removeBadage:(NSMutableArray *)inArguments{
+     setBadage = NO;
+    if(inArguments.count<1){
+        NSArray *views = [self.badageDic allValues];
+        for (UIView *view in views) {
+            [view removeFromSuperview];
+        }
+       
+        return;
+    }
+    id info=[inArguments[0] JSONValue];
+    NSArray *indexArr = [info objectForKey:@"indexes"];
+    for (int i = 0; i < indexArr.count; i++) {
+        int index = [indexArr[i] intValue];
+        NSInteger tag = index + kBaseTag;
+        NSString *id = [@(tag) stringValue];
+        UIView *view = [self.badageDic objectForKey:id];
+        [view removeFromSuperview];
+    }
+    
 }
 -(UIImage*)readImageFromPath:(NSString*)imagePath{
      imagePath = [EUtility getAbsPath:meBrwView path:imagePath];
@@ -158,17 +201,11 @@
     NSDictionary *dic = @{@"index":@(idx)};
     [self callBackJsonWithFunction:@"onTabItemClick" parameter:dic];
 }
--(void)popItemClick:(UIButton*)gesture{
-    int idx = (int)gesture.tag - kBaseTag;
-     NSDictionary *dic = @{@"index":@(idx)};
-    self.tabBar.popMainBackView.hidden = YES;
-    [self.tabBar.centerView resetAnimations];
-    [self callBackJsonWithFunction:@"onPopMenuItemClick" parameter:dic];
-  
-}
+
 -(void)close:(NSMutableArray *)array{
     currentOpenStaus = NO;
     if (self.tabBar) {
+        [self.badageDic removeAllObjects];
         [_tabBar removeFromSuperview];
         self.tabBar = nil;
     }
@@ -176,8 +213,8 @@
 
 #pragma mark - CallBack Method
 const static NSString *kPluginName=@"uexTabBarWithPopMenu";
--(void)callBackJsonWithFunction:(NSString *)functionName parameter:(id)obj{
-    NSString *jsonStr = [NSString stringWithFormat:@"if(%@.%@ != null){%@.%@('%@');}",kPluginName,functionName,kPluginName,functionName,[obj JSONFragment]];
+-(void)callBackJsonWithFunction:(NSString *)functionName parameter:(NSDictionary*)obj{
+    NSString *jsonStr = [NSString stringWithFormat:@"if(%@.%@ != null){%@.%@(%@);}",kPluginName,functionName,kPluginName,functionName,[obj JSONFragment]];
     [EUtility brwView:self.meBrwView evaluateScript:jsonStr];
     
 }

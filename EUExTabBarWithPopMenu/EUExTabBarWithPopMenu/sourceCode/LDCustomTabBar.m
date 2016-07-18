@@ -13,7 +13,10 @@
 #import "LDCustomTabBarItem.h"
 #import "LDPopMenuView.h"
 #import "EUtility.h"
+#import "LDPopMenuItem.h"
+#import "JSON.h"
 //32394a
+#define kBaseTag 1245
 #define kDefaultBackgroundColor ([UIColor colorWithRed:50/255.0 green:57/255.0 blue:74/255.0 alpha:1.0])
 //f5b82c
 #define kDefaultStatusViewColor ([UIColor colorWithRed:245/255.0 green:184/255.0 blue:44/255.0 alpha:1.0])
@@ -23,19 +26,24 @@
 static CGFloat const kDefaultCenterWidth = 59;
 static CGFloat const kDefaultCenterHeight = 59;
 
-@interface LDCustomTabBar() <LDCustomCenterItemDelegate>
+@interface LDCustomTabBar() <LDCustomCenterItemDelegate,UIScrollViewDelegate>
 @property(nonatomic,strong)NSArray *tabItems;
 @property(nonatomic,strong)NSArray *popItems;
 @property(nonatomic,strong)UIView *statusView;
 @property(nonatomic,strong)LDPopMenuView *containerView;
 @property(nonatomic,assign)NSInteger currentIndex;
 @property(nonatomic,strong)UIColor *statusColor;
-@property(nonatomic,strong)LDPopMenuView *popContainerView;
+@property(nonatomic,strong)LDCustomCenterItem *centerItem;
 @property(nonatomic,strong)NSMutableArray *selectArr;
 @property(nonatomic,assign)NSInteger count;
 @property(nonatomic,strong)UIImage *centerImage;
 @property(nonatomic,assign)CGFloat bottom;
 @property(nonatomic,strong)NSString *statusStr;
+@property(nonatomic,weak)EBrowserView *meBrowserView;
+@property(nonatomic,strong)UIPageControl *page;
+@property(nonatomic,assign)NSInteger pageCount;
+@property(nonatomic,strong) UIColor *pageBgColor;
+@property(nonatomic,strong) UIColor *pageCurrentColor;
 @end
 @implementation LDCustomTabBar
 -(id)initWithFrame:(CGRect)frame centerImage:(UIImage*)centerImage backgroundColor:(UIColor*)backgroundColor statusColor:(UIColor*) statusColor delegate:(id)delegate count:(NSInteger)count statusColorStr:(NSString *)str{
@@ -77,9 +85,9 @@ static CGFloat const kDefaultCenterHeight = 59;
     [self addTabItems];
 }
 -(void)addTabItems{
-    int count = self.tabItems.count;
+    NSUInteger count = self.tabItems.count;
     if (count > 0&&count%2==0) {
-        int middle = count/2;
+        NSUInteger middle = count/2;
         CGFloat itemWidth = (self.frame.size.width - self.centerView.frame.size.width)/count;
         for (int i = 0;i < self.tabItems.count;i++) {
             LDCustomTabBarItem *itemView = self.tabItems[i];
@@ -94,39 +102,93 @@ static CGFloat const kDefaultCenterHeight = 59;
     }
 
 }
--(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance Titles:(NSArray*)titles{
+-(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance popTextSize:(CGFloat)popTextSize popTextNColor:(NSString*)popTextNColor popTextHColor:(NSString*)popTextHColor Obj:(EBrowserView*)obj pageBgColor:(UIColor *)pageBgColor pageCurrentColor:(UIColor *)pageCurrentColor{
+    self.meBrowserView = obj;
     self.bottom = bottomDistance;
-    self.popItems = items;
-    [self addPopItemsWithBackgroundColor:bgColor popMenuColor:popMenuColor bottomDistance:bottomDistance Titles:titles];
-}
--(void)drawBackgroundView:(UIColor *)bgColor{
-    UIView *mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [EUtility screenWidth], [EUtility screenHeight])];
-    [mainView setBackgroundColor:bgColor];//[UIColor colorWithWhite:0 alpha:0.5]];
-    [mainView setHidden:YES];
+    self.pageCount = items.count;
+    self.pageBgColor = pageBgColor;
+    self.pageCurrentColor = pageCurrentColor;
+    self.popMainBackView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [EUtility screenWidth], [EUtility screenHeight])];
+    [self.popMainBackView setBackgroundColor:bgColor];
+    [self.popMainBackView setHidden:YES];
     UITapGestureRecognizer *mainBackTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popMainBackTap:)];
-    [mainView addGestureRecognizer:mainBackTap];
-    [[UIApplication sharedApplication].keyWindow addSubview:mainView];
-    self.popMainBackView = mainView;
-}
--(void)drawPopContainerVieWWithBottomDistance:(CGFloat)bottomDistance popMenuColor:(UIColor*)popMenuColor Titles:(NSArray*)titles{
-
-    self.containerView = [[LDPopMenuView alloc] initWithFrame:CGRectMake(0,[EUtility screenHeight] - bottomDistance,self.popMainBackView.frame.size.width , self.popMainBackView.frame.size.height - 200 ) items:self.popItems Title:titles];
-    [self.containerView setOpaque:YES];
-    [self.containerView setBackgroundColor:[UIColor clearColor]];//popMenuColor];
-    [self.popMainBackView addSubview:self.containerView];
-    //self.popMainBackView.backgroundColor = [UIColor clearColor];
+    [self.popMainBackView addGestureRecognizer:mainBackTap];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.popMainBackView];
+    self.popMainBackView.delegate = self;
+    
+    self.popMainBackView.contentSize = CGSizeMake(items.count *[EUtility screenWidth],0);
+    self.popMainBackView.pagingEnabled = YES;
+    self.popMainBackView.showsHorizontalScrollIndicator = NO;
+    
+    for (int i = 0; i < items.count; i++) {
+                NSMutableArray *popImageNArr = [NSMutableArray array];
+                NSMutableArray *popImageHArr = [NSMutableArray array];
+                NSMutableArray *popTitleArr = [NSMutableArray array];
+                NSArray *popDataArr = items[i];
+                for (NSDictionary *dic in popDataArr) {
+                    NSString *iconH = [dic objectForKey:@"iconH"];
+                    NSString *iconN = [dic objectForKey:@"iconN"];
+                    NSString *title = [dic objectForKey:@"title"];
+                    if (iconH) {
+                        [popImageHArr addObject:[self readImageFromPath:iconH]];
+                    }
+                    if (iconN) {
+                        [popImageNArr addObject:[self readImageFromPath:iconN]];
+                    }
+                    if (title) {
+                        [popTitleArr addObject:title];
+                    }
+                }
+                if (popImageNArr.count != popImageHArr.count ||popTitleArr.count != popImageHArr.count) {
+                    return;
+                }
+                NSMutableArray *popItemButtons = [NSMutableArray arrayWithCapacity:popDataArr.count];
+                for (int j = 0; j < popDataArr.count; j++) {
+                    LDPopMenuItem *item = [[LDPopMenuItem alloc] initWithTitle:popTitleArr[j] textSize:popTextSize textColor:[EUtility colorFromHTMLString:popTextNColor] highlightedTextColor:[EUtility colorFromHTMLString:popTextHColor] image:popImageNArr[j] selectedImage:popImageHArr[j]];
+                    item.tag = kBaseTag+j;
+                    [item addTarget:self action:@selector(popItemClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [popItemButtons addObject:item];
+                
+            }
+        self.popItems = popItemButtons;
+        self.containerView = [[LDPopMenuView alloc] initWithFrame:CGRectMake(i*self.popMainBackView.frame.size.width,[EUtility screenHeight] - bottomDistance,self.popMainBackView.frame.size.width , self.popMainBackView.frame.size.height) items:self.popItems Title:popTitleArr];
+        [self.containerView setOpaque:YES];
+        [self.containerView setBackgroundColor:popMenuColor];
+        [self.popMainBackView addSubview:self.containerView];
+        [popTitleArr removeAllObjects];
+        [popImageHArr removeAllObjects];
+        [popImageNArr removeAllObjects];
+    }
     
 }
+-(void)popItemClick:(UIButton*)gesture{
+    int idx = (int)gesture.tag - kBaseTag;
+    NSDictionary *dic = @{@"page":@(self.page.currentPage),@"index":@(idx)};
+    [self.page removeFromSuperview];
+    [self.centerView resetAnimations];
+    [self.centerItem removeFromSuperview];
+    self.popMainBackView.hidden = YES;
+    NSString *kPluginName=@"uexTabBarWithPopMenu";
+    NSString *functionName = @"onPopMenuItemClick";
+   NSString *jsonStr = [NSString stringWithFormat:@"if(%@.%@ != null){%@.%@(%@);}",kPluginName,functionName,kPluginName,functionName,[dic JSONFragment]];
+    [EUtility brwView:self.meBrowserView evaluateScript:jsonStr];
+    
+    
+}
+
+-(UIImage*)readImageFromPath:(NSString*)imagePath{
+    imagePath = [EUtility getAbsPath:self.meBrowserView path:imagePath];
+    UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+    return image;
+}
 -(void)popMainBackTap:(UIGestureRecognizer *)tapG{
+    [self.page removeFromSuperview];
+    [self.centerItem removeFromSuperview];
     UIView *gView = tapG.view;
     [gView setHidden:YES];
     [self.centerView resetAnimations];
 }
--(void)addPopItemsWithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor bottomDistance:(CGFloat)bottomDistance Titles:(NSArray*)titles{
-    [self drawBackgroundView:bgColor];
-    [self drawPopContainerVieWWithBottomDistance:bottomDistance popMenuColor:popMenuColor Titles:titles];
 
-}
 -(void)selectTabItemWithIndex:(int)index{
     if (index > self.tabItems.count) {
         return;
@@ -140,22 +202,42 @@ static CGFloat const kDefaultCenterHeight = 59;
         return;
     }
     self.popMainBackView.hidden = NO;
-    LDCustomCenterItem *centerItem = nil;
     if (!isExpanding) {
-       centerItem = [[LDCustomCenterItem alloc] initWithFrame:CGRectMake((self.frame.size.width - kDefaultCenterWidth)*0.5, self.bottom -50+self.frame.size.height - kDefaultCenterHeight, kDefaultCenterWidth, kDefaultCenterHeight) contentImg:self.centerImage];
+        
+       self.centerItem = [[LDCustomCenterItem alloc] initWithFrame:CGRectMake((self.frame.size.width - kDefaultCenterWidth)*0.5,[EUtility screenHeight] - kDefaultCenterHeight, kDefaultCenterWidth, kDefaultCenterHeight) contentImg:self.centerImage];
         UITapGestureRecognizer *mainBackTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(centerTap:)];
-        [centerItem resetAnimations];
-        [centerItem.contentImgView addGestureRecognizer:mainBackTap];
-        [self.containerView addSubview:centerItem];
-  
+        [self.centerItem resetAnimations];
+        [self.centerItem.contentImgView addGestureRecognizer:mainBackTap];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.centerItem];
+        self.page = [UIPageControl new];
+        self.page.numberOfPages = self.pageCount;
+        self.page.hidesForSinglePage = YES;
+        self.page.currentPageIndicatorTintColor = self.pageCurrentColor;
+        self.page.pageIndicatorTintColor = self.pageBgColor;
+        self.page.center = CGPointMake([EUtility screenWidth]/2, [EUtility screenHeight] - 80);
+        [[UIApplication sharedApplication].keyWindow addSubview:self.page];
+        
+        
+        
     }else{
-        [centerItem removeFromSuperview];
+        [self.page removeFromSuperview];
+        [self.centerItem removeFromSuperview];
     }
     
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    //获取内容的偏移量，向左移动为正
+    CGPoint offSet = scrollView.contentOffset;
+    //把值进行四舍五入，使用round()函数
+    NSInteger index = round(offSet.x/scrollView.frame.size.width);
+    //设置当前页
+    self.page.currentPage = index;
 }
 -(void)centerTap:(UIGestureRecognizer *)tapG{
     UIView *gView = tapG.view;
     [gView setHidden:YES];
+    [self.page removeFromSuperview];
+    [self.centerItem removeFromSuperview];
     self.popMainBackView.hidden = YES;
     [self.centerView resetAnimations];
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
-    <plugin uexName="uexTabBarWithPopMenu" version="3.0.0" build="0">
-        <info>0:uexTabBarWithPopMenu</info>
+    <plugin uexName="uexTabBarWithPopMenu" version="3.0.1" build="1">
+    	<info>1:新增分页和未读提醒功能</info>
+        <build>0:uexTabBarWithPopMenu</build>
     </plugin>
 </uexplugins>
 
