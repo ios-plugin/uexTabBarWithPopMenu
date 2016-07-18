@@ -158,6 +158,7 @@ static CGFloat const kDefaultCenterHeight = 59;
         [popTitleArr removeAllObjects];
         [popImageHArr removeAllObjects];
         [popImageNArr removeAllObjects];
+        [popItemButtons removeAllObjects];
     }
     
 }

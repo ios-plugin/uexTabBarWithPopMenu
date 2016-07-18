@@ -17,6 +17,7 @@
     BOOL setBadage;
 }
 @property(nonatomic,strong)NSMutableDictionary *badageDic;
+@property(nonatomic,strong)NSMutableArray *itemButtons;
 @end
 @implementation EUExTabBarWithPopMenu
 -(id)initWithBrwView:(EBrowserView *)eInBrwView{
@@ -83,43 +84,22 @@
     NSString *popBgColor = [popMenuDic objectForKey:@"bgColor"]?:@"#66ffffff";
     NSString *popMenuColor = [popMenuDic objectForKey:@"popMenuColor"]?:@"#66ffffff";
     NSArray *dataArr = [popMenuDic objectForKey:@"data"];
-    //NSArray *popDataArr = dataArr[0];
-//    NSMutableArray *popImageNArr = [NSMutableArray arrayWithCapacity:popDataArr.count];
-//    NSMutableArray *popImageHArr = [NSMutableArray arrayWithCapacity:popDataArr.count];
-//    NSMutableArray *popTitleArr = [NSMutableArray arrayWithCapacity:popDataArr.count];
-//    for (NSDictionary *dic in popDataArr) {
-//        NSString *iconH = [dic objectForKey:@"iconH"];
-//        NSString *iconN = [dic objectForKey:@"iconN"];
-//        NSString *title = [dic objectForKey:@"title"];
-//        if (iconH) {
-//            [popImageHArr addObject:[self readImageFromPath:iconH]];
-//        }
-//        if (iconN) {
-//            [popImageNArr addObject:[self readImageFromPath:iconN]];
-//        }
-//        if (title) {
-//            [popTitleArr addObject:title];
-//        }
-//    }
-//    if (popImageNArr.count != popImageHArr.count ||popTitleArr.count != popImageHArr.count) {
-//        return;
-//    }
 
     /*-----------------------*/
     self.tabBar = [[LDCustomTabBar alloc] initWithFrame:CGRectMake(x,y ,width, height) centerImage:[self readImageFromPath:centerImgSrc] backgroundColor:[EUtility colorFromHTMLString:bgColor] statusColor:[EUtility colorFromHTMLString:statusColor] delegate:self count:tabDataArr.count statusColorStr:[info objectForKey:@"statusColor"]];
     
     /*----------- set tab data------------*/
-    NSMutableArray *itemButtons = [NSMutableArray arrayWithCapacity:tabDataArr.count];
+    self.itemButtons = [NSMutableArray arrayWithCapacity:tabDataArr.count];
     for (int i = 0; i < tabDataArr.count; i++) {
        LDCustomTabBarItem *item = [[LDCustomTabBarItem alloc] initWithTitle:titleArr[i] textSize:tabTextSize textColor:[EUtility colorFromHTMLString:tabTextNColor] highlightedTextColor:[EUtility colorFromHTMLString:tabTextHColor]  contentImage:imageNArr[i] contentHighlightImage:imageHArr[i]];
         item.tag = kBaseTag+i;
         UITapGestureRecognizer *tabTapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tabBarItemClick:)];
         [item addGestureRecognizer:tabTapG];
-        [itemButtons addObject:item];
-        
+        [_itemButtons addObject:item];
+        [item release];
         
     }
-    [self.tabBar setTabBarItems:itemButtons];
+    [self.tabBar setTabBarItems:_itemButtons];
      /*----------set pop data--------------*/
    
     [self.tabBar setPopMenuItems:dataArr WithBackgroundColor:[EUtility colorFromHTMLString:popBgColor] popMenuColor:[EUtility colorFromHTMLString:popMenuColor] BottomDistance:bottomDistance popTextSize:popTextSize popTextNColor:popTextNColor popTextHColor:popTextHColor Obj:meBrwView pageBgColor:[EUtility colorFromHTMLString:pageBgColor] pageCurrentColor:[EUtility colorFromHTMLString:pageCurrentColor]];
@@ -129,7 +109,7 @@
     [imageHArr removeAllObjects];
     [imageNArr removeAllObjects];
     [titleArr removeAllObjects];
-
+    
 }
 -(void)setItemChecked:(NSMutableArray *)inArguments{
     if(inArguments.count<1){
@@ -164,8 +144,10 @@
         NSString *id = [@(tag) stringValue];
         [self.badageDic setObject:view forKey:id];
         [self.tabBar addSubview:view];
+        [view release];
     }
     setBadage = YES;
+    
     
 }
 -(void)removeBadge:(NSMutableArray *)inArguments{
@@ -205,6 +187,7 @@
 -(void)close:(NSMutableArray *)array{
     currentOpenStaus = NO;
     if (self.tabBar) {
+        [_itemButtons removeAllObjects];
         [self.badageDic removeAllObjects];
         [_tabBar removeFromSuperview];
         self.tabBar = nil;
