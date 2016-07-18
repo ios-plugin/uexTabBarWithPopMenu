@@ -140,7 +140,7 @@
     [self.tabBar selectTabItemWithIndex:index];
 
 }
--(void)setBadage:(NSMutableArray *)inArguments{
+-(void)setBadge:(NSMutableArray *)inArguments{
     if (setBadage) {
         return;
     }
@@ -168,7 +168,7 @@
     setBadage = YES;
     
 }
--(void)removeBadage:(NSMutableArray *)inArguments{
+-(void)removeBadge:(NSMutableArray *)inArguments{
      setBadage = NO;
     if(inArguments.count<1){
         NSArray *views = [self.badageDic allValues];
