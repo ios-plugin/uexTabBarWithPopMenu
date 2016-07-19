@@ -142,6 +142,10 @@
         [view.layer setCornerRadius:2.0];
         view.layer.masksToBounds = YES;
         NSString *id = [@(tag) stringValue];
+        if ([self.badageDic objectForKey:id]) {
+            [[self.badageDic objectForKey:id] removeFromSuperview];
+            [self.badageDic removeObjectForKey:id];
+        }
         [self.badageDic setObject:view forKey:id];
         [self.tabBar addSubview:view];
         [view release];
