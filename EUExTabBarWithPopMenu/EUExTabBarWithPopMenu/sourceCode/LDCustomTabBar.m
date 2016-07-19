@@ -7,14 +7,11 @@
 //
 
 #import "LDCustomTabBar.h"
-
-//#import "UIView+Helpers.h"
-//#import "LDPluginUtil.h"
 #import "LDCustomTabBarItem.h"
 #import "LDPopMenuView.h"
 #import "EUtility.h"
 #import "LDPopMenuItem.h"
-#import "JSON.h"
+
 //32394a
 #define kBaseTag 1245
 #define kDefaultBackgroundColor ([UIColor colorWithRed:50/255.0 green:57/255.0 blue:74/255.0 alpha:1.0])
@@ -39,7 +36,8 @@ static CGFloat const kDefaultCenterHeight = 59;
 @property(nonatomic,strong)UIImage *centerImage;
 @property(nonatomic,assign)CGFloat bottom;
 @property(nonatomic,strong)NSString *statusStr;
-@property(nonatomic,weak)EBrowserView *meBrowserView;
+@property(nonatomic, weak) id<AppCanWebViewEngineObject> webView0bj;
+@property(nonatomic, weak) EUExTabBarWithPopMenu *uexObj;
 @property(nonatomic,strong)UIPageControl *page;
 @property(nonatomic,assign)NSInteger pageCount;
 @property(nonatomic,strong) UIColor *pageBgColor;
@@ -102,8 +100,9 @@ static CGFloat const kDefaultCenterHeight = 59;
     }
 
 }
--(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance popTextSize:(CGFloat)popTextSize popTextNColor:(NSString*)popTextNColor popTextHColor:(NSString*)popTextHColor Obj:(EBrowserView*)obj pageBgColor:(UIColor *)pageBgColor pageCurrentColor:(UIColor *)pageCurrentColor{
-    self.meBrowserView = obj;
+-(void)setPopMenuItems:(NSArray *)items WithBackgroundColor:(UIColor *)bgColor popMenuColor:(UIColor*)popMenuColor BottomDistance:(CGFloat)bottomDistance popTextSize:(CGFloat)popTextSize popTextNColor:(NSString*)popTextNColor popTextHColor:(NSString*)popTextHColor Obj:(id<AppCanWebViewEngineObject>)obj uexObj:(EUExTabBarWithPopMenu*)uexObj pageBgColor:(UIColor*)pageBgColor pageCurrentColor:(UIColor*)pageCurrentColor{
+    self.webView0bj = obj;
+    self.uexObj = uexObj;
     self.bottom = bottomDistance;
     self.pageCount = items.count;
     self.pageBgColor = pageBgColor;
@@ -169,16 +168,13 @@ static CGFloat const kDefaultCenterHeight = 59;
     [self.centerView resetAnimations];
     [self.centerItem removeFromSuperview];
     self.popMainBackView.hidden = YES;
-    NSString *kPluginName=@"uexTabBarWithPopMenu";
-    NSString *functionName = @"onPopMenuItemClick";
-   NSString *jsonStr = [NSString stringWithFormat:@"if(%@.%@ != null){%@.%@(%@);}",kPluginName,functionName,kPluginName,functionName,[dic JSONFragment]];
-    [EUtility brwView:self.meBrowserView evaluateScript:jsonStr];
+    [self.webView0bj callbackWithFunctionKeyPath:@"uexTabBarWithPopMenu.onPopMenuItemClick" arguments:ACArgsPack(dic)];
     
     
 }
 
 -(UIImage*)readImageFromPath:(NSString*)imagePath{
-    imagePath = [EUtility getAbsPath:self.meBrowserView path:imagePath];
+    imagePath = [self.uexObj absPath:imagePath];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
     return image;
 }
@@ -306,7 +302,7 @@ static CGFloat const kDefaultCenterHeight = 59;
      [itemView.titleLabel setTextColor:itemView.textColor];
      [itemView.titleLabel setHighlightedTextColor:itemView.highlightedTextColor];
  }
-    
+
 
     
 

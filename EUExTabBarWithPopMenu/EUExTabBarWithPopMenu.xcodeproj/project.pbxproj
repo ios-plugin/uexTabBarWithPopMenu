@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		09F76E971CFFC71500F3C570 /* UIView+Extenssion.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F76E961CFFC71500F3C570 /* UIView+Extenssion.m */; };
+		218436F01D3C790E006B8B67 /* AppCanKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218436EF1D3C790E006B8B67 /* AppCanKit.framework */; };
 		8457EC621A69552600F7C257 /* EUExTabBarWithPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC611A69552600F7C257 /* EUExTabBarWithPopMenu.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8457EC8F1A69565200F7C257 /* LDCustomCenterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC821A69565200F7C257 /* LDCustomCenterItem.m */; };
 		8457EC901A69565200F7C257 /* LDCustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC841A69565200F7C257 /* LDCustomTabBar.m */; };
@@ -31,18 +32,10 @@
 /* Begin PBXFileReference section */
 		09F76E951CFFC71500F3C570 /* UIView+Extenssion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extenssion.h"; sourceTree = "<group>"; };
 		09F76E961CFFC71500F3C570 /* UIView+Extenssion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extenssion.m"; sourceTree = "<group>"; };
+		218436EF1D3C790E006B8B67 /* AppCanKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCanKit.framework; sourceTree = "<group>"; };
 		8457EC5C1A69552600F7C257 /* libuexTabBarWithPopMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuexTabBarWithPopMenu.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8457EC5F1A69552600F7C257 /* EUExTabBarWithPopMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EUExTabBarWithPopMenu.h; sourceTree = "<group>"; };
 		8457EC611A69552600F7C257 /* EUExTabBarWithPopMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EUExTabBarWithPopMenu.m; sourceTree = "<group>"; };
-		8457EC781A69565200F7C257 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		8457EC791A69565200F7C257 /* JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
-		8457EC7A1A69565200F7C257 /* MD5Digest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5Digest.h; sourceTree = "<group>"; };
-		8457EC7B1A69565200F7C257 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
-		8457EC7C1A69565200F7C257 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
-		8457EC7D1A69565200F7C257 /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
-		8457EC7E1A69565200F7C257 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
-		8457EC7F1A69565200F7C257 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
-		8457EC801A69565200F7C257 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		8457EC811A69565200F7C257 /* LDCustomCenterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDCustomCenterItem.h; sourceTree = "<group>"; };
 		8457EC821A69565200F7C257 /* LDCustomCenterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDCustomCenterItem.m; sourceTree = "<group>"; };
 		8457EC831A69565200F7C257 /* LDCustomTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDCustomTabBar.h; sourceTree = "<group>"; };
@@ -53,7 +46,6 @@
 		8457EC8C1A69565200F7C257 /* LDPopMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDPopMenuItem.m; sourceTree = "<group>"; };
 		8457EC8D1A69565200F7C257 /* LDPopMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDPopMenuView.h; sourceTree = "<group>"; };
 		8457EC8E1A69565200F7C257 /* LDPopMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDPopMenuView.m; sourceTree = "<group>"; };
-		8457EC9B1A6956EF00F7C257 /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBase.h; sourceTree = "<group>"; };
 		8457EC9C1A6956EF00F7C257 /* EUExBaseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBaseDefine.h; sourceTree = "<group>"; };
 		8457EC9D1A6956EF00F7C257 /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				218436F01D3C790E006B8B67 /* AppCanKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +92,7 @@
 		8457EC761A69565200F7C257 /* sourceCode */ = {
 			isa = PBXGroup;
 			children = (
-				8457EC771A69565200F7C257 /* JSON */,
+				218436EF1D3C790E006B8B67 /* AppCanKit.framework */,
 				8457EC811A69565200F7C257 /* LDCustomCenterItem.h */,
 				8457EC821A69565200F7C257 /* LDCustomCenterItem.m */,
 				8457EC831A69565200F7C257 /* LDCustomTabBar.h */,
@@ -116,26 +109,9 @@
 			path = sourceCode;
 			sourceTree = "<group>";
 		};
-		8457EC771A69565200F7C257 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				8457EC781A69565200F7C257 /* JSON.h */,
-				8457EC791A69565200F7C257 /* JSONParser.h */,
-				8457EC7A1A69565200F7C257 /* MD5Digest.h */,
-				8457EC7B1A69565200F7C257 /* NSObject+SBJSON.h */,
-				8457EC7C1A69565200F7C257 /* NSString+SBJSON.h */,
-				8457EC7D1A69565200F7C257 /* SBJSON.h */,
-				8457EC7E1A69565200F7C257 /* SBJsonBase.h */,
-				8457EC7F1A69565200F7C257 /* SBJsonParser.h */,
-				8457EC801A69565200F7C257 /* SBJsonWriter.h */,
-			);
-			path = JSON;
-			sourceTree = "<group>";
-		};
 		8457EC9A1A6956EF00F7C257 /* engineHeader */ = {
 			isa = PBXGroup;
 			children = (
-				8457EC9B1A6956EF00F7C257 /* EUExBase.h */,
 				8457EC9C1A6956EF00F7C257 /* EUExBaseDefine.h */,
 				8457EC9D1A6956EF00F7C257 /* EUtility.h */,
 			);
@@ -291,6 +267,10 @@
 		8457EC711A69552600F7C257 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EUExTabBarWithPopMenu/sourceCode",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = uexTabBarWithPopMenu;
@@ -301,6 +281,10 @@
 		8457EC721A69552600F7C257 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EUExTabBarWithPopMenu/sourceCode",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = uexTabBarWithPopMenu;
