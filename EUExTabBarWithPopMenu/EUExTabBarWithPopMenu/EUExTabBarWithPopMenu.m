@@ -30,7 +30,8 @@
         return;
     }
    
-    id info=[inArguments[0] ac_JSONValue];
+    //id info=[inArguments[0] ac_JSONValue];
+    ACArgsUnpack(NSDictionary *info) = inArguments;
     float x = [[info objectForKey:@"left"] floatValue]?:0;
     float hei = 50;//0.1*[EUtility screenHeight];
     float width = [[info objectForKey:@"width"] floatValue]?:[EUtility screenWidth];
@@ -91,7 +92,7 @@
         UITapGestureRecognizer *tabTapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tabBarItemClick:)];
         [item addGestureRecognizer:tabTapG];
         [_itemButtons addObject:item];
-        [item release];
+        //[item release];
         
     }
     [self.tabBar setTabBarItems:_itemButtons];
@@ -112,7 +113,8 @@
     if(inArguments.count<1){
         return;
     }
-    id info=[inArguments[0] ac_JSONValue];
+    //id info=[inArguments[0] ac_JSONValue];
+    ACArgsUnpack(NSDictionary *info) = inArguments;
     int index = [[info objectForKey:@"index"]intValue];
     [self.tabBar selectTabItemWithIndex:index];
 
@@ -124,7 +126,8 @@
     if(inArguments.count<1){
         return;
     }
-    id info=[inArguments[0] ac_JSONValue];
+    //id info=[inArguments[0] ac_JSONValue];
+    ACArgsUnpack(NSDictionary *info) = inArguments;
     NSArray *indexArr = [info objectForKey:@"indexes"];
     for (int i = 0; i < indexArr.count; i++) {
         int index = [indexArr[i] intValue];
@@ -145,7 +148,7 @@
         }
         [self.badageDic setObject:view forKey:id];
         [self.tabBar addSubview:view];
-        [view release];
+        //[view release];
     }
     setBadage = YES;
     
@@ -160,7 +163,8 @@
        
         return;
     }
-    id info=[inArguments[0] ac_JSONValue];
+    //id info=[inArguments[0] ac_JSONValue];
+    ACArgsUnpack(NSDictionary *info) = inArguments;
     NSArray *indexArr = [info objectForKey:@"indexes"];
     for (int i = 0; i < indexArr.count; i++) {
         int index = [indexArr[i] intValue];

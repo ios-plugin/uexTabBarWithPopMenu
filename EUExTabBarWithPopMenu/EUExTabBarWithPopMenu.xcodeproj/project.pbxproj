@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		09F76E971CFFC71500F3C570 /* UIView+Extenssion.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F76E961CFFC71500F3C570 /* UIView+Extenssion.m */; };
 		218436F01D3C790E006B8B67 /* AppCanKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 218436EF1D3C790E006B8B67 /* AppCanKit.framework */; };
-		8457EC621A69552600F7C257 /* EUExTabBarWithPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC611A69552600F7C257 /* EUExTabBarWithPopMenu.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8457EC621A69552600F7C257 /* EUExTabBarWithPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC611A69552600F7C257 /* EUExTabBarWithPopMenu.m */; };
 		8457EC8F1A69565200F7C257 /* LDCustomCenterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC821A69565200F7C257 /* LDCustomCenterItem.m */; };
 		8457EC901A69565200F7C257 /* LDCustomTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC841A69565200F7C257 /* LDCustomTabBar.m */; };
 		8457EC911A69565200F7C257 /* LDCustomTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8457EC861A69565200F7C257 /* LDCustomTabBarItem.m */; };
