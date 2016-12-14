@@ -9,7 +9,7 @@
 #import "EUExTabBarWithPopMenu.h"
 #import "EUtility.h"
 #import "LDCustomTabBarItem.h"
-#import "JSON.h"
+
 #import "LDPopMenuItem.h"
 #define kBaseTag 1245
 @interface EUExTabBarWithPopMenu(){
@@ -17,16 +17,10 @@
     BOOL setBadage;
 }
 @property(nonatomic,strong)NSMutableDictionary *badageDic;
-@property(nonatomic,strong)NSMutableArray *itemButtons;
+@property(nonatomic,strong) NSMutableArray *itemButtons;
 @end
 @implementation EUExTabBarWithPopMenu
--(id)initWithBrwView:(EBrowserView *)eInBrwView{
-    self = [super initWithBrwView:eInBrwView];
-    if (self) {
-        
-    }
-    return self;
-}
+
 -(void)open:(NSMutableArray *)inArguments{
     self.badageDic = [NSMutableDictionary dictionary];
     if(inArguments.count<1){
@@ -36,7 +30,8 @@
         return;
     }
    
-    id info=[inArguments[0] JSONValue];
+    //id info=[inArguments[0] ac_JSONValue];
+    ACArgsUnpack(NSDictionary *info) = inArguments;
     float x = [[info objectForKey:@"left"] floatValue]?:0;
     float hei = 50;//0.1*[EUtility screenHeight];
     float width = [[info objectForKey:@"width"] floatValue]?:[EUtility screenWidth];
@@ -84,6 +79,7 @@
     NSString *popBgColor = [popMenuDic objectForKey:@"bgColor"]?:@"#66ffffff";
     NSString *popMenuColor = [popMenuDic objectForKey:@"popMenuColor"]?:@"#66ffffff";
     NSArray *dataArr = [popMenuDic objectForKey:@"data"];
+ 
 
     /*-----------------------*/
     self.tabBar = [[LDCustomTabBar alloc] initWithFrame:CGRectMake(x,y ,width, height) centerImage:[self readImageFromPath:centerImgSrc] backgroundColor:[EUtility colorFromHTMLString:bgColor] statusColor:[EUtility colorFromHTMLString:statusColor] delegate:self count:tabDataArr.count statusColorStr:[info objectForKey:@"statusColor"]];
@@ -96,26 +92,29 @@
         UITapGestureRecognizer *tabTapG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tabBarItemClick:)];
         [item addGestureRecognizer:tabTapG];
         [_itemButtons addObject:item];
-        [item release];
+        //[item release];
         
     }
     [self.tabBar setTabBarItems:_itemButtons];
      /*----------set pop data--------------*/
    
-    [self.tabBar setPopMenuItems:dataArr WithBackgroundColor:[EUtility colorFromHTMLString:popBgColor] popMenuColor:[EUtility colorFromHTMLString:popMenuColor] BottomDistance:bottomDistance popTextSize:popTextSize popTextNColor:popTextNColor popTextHColor:popTextHColor Obj:meBrwView pageBgColor:[EUtility colorFromHTMLString:pageBgColor] pageCurrentColor:[EUtility colorFromHTMLString:pageCurrentColor]];
+    [self.tabBar setPopMenuItems:dataArr WithBackgroundColor:[EUtility colorFromHTMLString:popBgColor] popMenuColor:[EUtility colorFromHTMLString:popMenuColor] BottomDistance:bottomDistance popTextSize:popTextSize popTextNColor:popTextNColor popTextHColor:popTextHColor Obj:self.webViewEngine uexObj:self  pageBgColor:[EUtility colorFromHTMLString:pageBgColor] pageCurrentColor:[EUtility colorFromHTMLString:pageCurrentColor]];
     /*------------------------*/
     currentOpenStaus = YES;
-    [EUtility brwView:self.meBrwView addSubview:self.tabBar];
+    //[EUtility brwView:self.meBrwView addSubview:self.tabBar];
+    [[self.webViewEngine webView] addSubview:self.tabBar];
+    
     [imageHArr removeAllObjects];
     [imageNArr removeAllObjects];
     [titleArr removeAllObjects];
-    
+
 }
 -(void)setItemChecked:(NSMutableArray *)inArguments{
     if(inArguments.count<1){
         return;
     }
-    id info=[inArguments[0] JSONValue];
+    //id info=[inArguments[0] ac_JSONValue];
+    ACArgsUnpack(NSDictionary *info) = inArguments;
     int index = [[info objectForKey:@"index"]intValue];
     [self.tabBar selectTabItemWithIndex:index];
 
@@ -127,7 +126,8 @@
     if(inArguments.count<1){
         return;
     }
-    id info=[inArguments[0] JSONValue];
+    //id info=[inArguments[0] ac_JSONValue];
+    ACArgsUnpack(NSDictionary *info) = inArguments;
     NSArray *indexArr = [info objectForKey:@"indexes"];
     for (int i = 0; i < indexArr.count; i++) {
         int index = [indexArr[i] intValue];
@@ -148,10 +148,9 @@
         }
         [self.badageDic setObject:view forKey:id];
         [self.tabBar addSubview:view];
-        [view release];
+        //[view release];
     }
     setBadage = YES;
-    
     
 }
 -(void)removeBadge:(NSMutableArray *)inArguments{
@@ -164,7 +163,8 @@
        
         return;
     }
-    id info=[inArguments[0] JSONValue];
+    //id info=[inArguments[0] ac_JSONValue];
+    ACArgsUnpack(NSDictionary *info) = inArguments;
     NSArray *indexArr = [info objectForKey:@"indexes"];
     for (int i = 0; i < indexArr.count; i++) {
         int index = [indexArr[i] intValue];
@@ -176,7 +176,7 @@
     
 }
 -(UIImage*)readImageFromPath:(NSString*)imagePath{
-     imagePath = [EUtility getAbsPath:meBrwView path:imagePath];
+    imagePath = [self absPath:imagePath];
      UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
     return image;
 }
@@ -185,7 +185,7 @@
     int idx = (int)v.tag - kBaseTag;
     [self.tabBar selectTabItemWithIndex:idx];
     NSDictionary *dic = @{@"index":@(idx)};
-    [self callBackJsonWithFunction:@"onTabItemClick" parameter:dic];
+    [self.webViewEngine callbackWithFunctionKeyPath:@"uexTabBarWithPopMenu.onTabItemClick" arguments:ACArgsPack(dic)];
 }
 
 -(void)close:(NSMutableArray *)array{
@@ -198,12 +198,5 @@
     }
 }
 
-#pragma mark - CallBack Method
-const static NSString *kPluginName=@"uexTabBarWithPopMenu";
--(void)callBackJsonWithFunction:(NSString *)functionName parameter:(NSDictionary*)obj{
-    NSString *jsonStr = [NSString stringWithFormat:@"if(%@.%@ != null){%@.%@(%@);}",kPluginName,functionName,kPluginName,functionName,[obj JSONFragment]];
-    [EUtility brwView:self.meBrwView evaluateScript:jsonStr];
-    
-}
 
 @end

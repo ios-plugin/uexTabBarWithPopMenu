@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <uexplugins>
-  <plugin uexName="uexTabBarWithPopMenu" version="3.0.2" build="2">
-    <info>2: IDE证书更新</info>
-    <build>1: 新增分页和未读提醒功能</build>
-    <build>0: uexTabBarWithPopMenu</build>
-  </plugin>
+    <plugin uexName="uexTabBarWithPopMenu" version="4.0.0" build="0">
+    	<info>0:uexTabBarWithPopMenu 支持引擎4.0</info>
+    </plugin>
 </uexplugins>

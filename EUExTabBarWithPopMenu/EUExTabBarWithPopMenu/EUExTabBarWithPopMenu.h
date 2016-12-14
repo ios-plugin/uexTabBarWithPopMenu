@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "EUExBase.h"
 #import "LDCustomTabBar.h"
+#import <AppCanKit/AppCanKit.h>
+@class LDCustomTabBar;
 @interface EUExTabBarWithPopMenu : EUExBase
-@property(nonatomic,retain)LDCustomTabBar *tabBar;
+@property(nonatomic,strong)LDCustomTabBar *tabBar;
+
 @end
